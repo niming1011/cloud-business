@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: gateway-server
+  config:
+
+    # 这里根据下面的 prefix 和 profile 规则，去拉取 gateway-server-power-mall.yaml
+    import:
+    - nacos:${spring.application.name}.${spring.cloud.nacos.config.file-extension}
+  cloud:
+    nacos:
+      server-addr: 192.168.62.130:8848
+      # 如果你的 Nacos 开启了鉴权，请取消下面两行的注释
+      # username: nacos
+      # password: nacos
+      discovery:
+        namespace: 754eca93-0e5b-4465-8b0f-77c35738d4aa
+        service: ${spring.application.name}
+        group: GATEWAY_GROUP
+      config:
+        namespace: ${spring.cloud.nacos.discovery.namespace}
+        # 【已修复】前缀应该是服务名，而不是服务器 IP
+        prefix: ${spring.application.name}
+        group: ${spring.cloud.nacos.discovery.group}
+        file-extension: yaml
+  profiles:
+    # 建议写成单行格式
+    active: dev
