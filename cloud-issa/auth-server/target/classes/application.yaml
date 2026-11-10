@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: auth-server
+  config:
+
+    # 这里根据下面的 prefix 和 profile 规则，去拉取 gateway-server-power-mall.yaml
+    import:
+      - nacos:${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+      - nacos:application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}?group=DEFAULT_GROUP&refreshEnabled=true
+  cloud:
+    nacos:
+      server-addr: 192.168.62.130:8848
+      # username: nacos
+      # password: nacos
+      discovery:
+        namespace: 910f1eca-65e0-4d40-b0d4-5c40c9ce57d0
+        service: ${spring.application.name}
+        group: GATEWAY_GROUP
+      config:
+        namespace: ${spring.cloud.nacos.discovery.namespace}
+        prefix: ${spring.application.name}
+        group: ${spring.cloud.nacos.discovery.group}
+        file-extension: yaml
+  profiles:
+    # 建议写成单行格式
+    active: dev
+
+############################################# nacos远程配置
+#spring:
+#  datasource:
+#    druid:
+#      driver: com.mysql.cj.jdbc.Driver
+#      url: jdbc:mysql://192.168.62.130:3306?power-mall
+#      username: root
+#      password: 15686113360s
+#  data:
+#    redis:
+#      host: 192.168.62.130
+#      port: 6379
+#  mvc:
+#    pathmatch:
+#      matching-strategy: ant_path_matcher
+#    format:
+#      date: yyyy-MM-dd HH:mm:ss
+#  jackson:
+#    date-format: yyyy-MM-dd HH:mm:ss
+#    time-zone: GMT+8
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

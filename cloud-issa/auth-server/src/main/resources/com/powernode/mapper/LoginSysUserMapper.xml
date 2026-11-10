@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powernode.mapper.LoginSysUserMapper">
+
+    <resultMap id="BaseResultMap" type="com.powernode.domain.LoginSysUser">
+            <id property="userId" column="user_id" />
+            <result property="username" column="username" />
+            <result property="password" column="password" />
+            <result property="status" column="status" />
+            <result property="shopId" column="shop_id" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id,username,password,status,shop_id
+    </sql>
+    <select id="selectPermsByUserId" resultType="java.lang.String">
+        select t1.perms from sys_menu t1 join sys_role_menu t2 join sys_user_role t3 on (t1.menu_id=t2.menu_id and t2.role_id=t3.role_id)
+        where t3.user_id=#{userId} and t1.type=2
+    </select>
+</mapper>

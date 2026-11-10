@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Component
-@ConfigurationProperties(prefix = "gatway.white")
+@ConfigurationProperties(prefix = "gateway.white")
 @RefreshScope
 public class WhiteUrlsConfig {
     private List<String> allowUrls;

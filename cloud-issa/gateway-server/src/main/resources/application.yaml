@@ -5,7 +5,7 @@ spring:
 
     # 这里根据下面的 prefix 和 profile 规则，去拉取 gateway-server-power-mall.yaml
     import:
-    - nacos:${spring.application.name}.${spring.cloud.nacos.config.file-extension}
+    - nacos:${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
   cloud:
     nacos:
       server-addr: 192.168.62.130:8848
@@ -13,7 +13,7 @@ spring:
       # username: nacos
       # password: nacos
       discovery:
-        namespace: 754eca93-0e5b-4465-8b0f-77c35738d4aa
+        namespace: 910f1eca-65e0-4d40-b0d4-5c40c9ce57d0
         service: ${spring.application.name}
         group: GATEWAY_GROUP
       config:
