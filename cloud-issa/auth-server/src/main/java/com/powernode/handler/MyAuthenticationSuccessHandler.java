@@ -2,14 +2,13 @@ package com.powernode.handler;
 
 import cn.hutool.json.JSONUtil;
 import com.powernode.constant.AuthConstants;
+import com.powernode.domain.SecurityUser;
 import com.powernode.model.LoginResult;
-import com.powernode.model.SecurityUser;
 import com.powernode.result.Result;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;

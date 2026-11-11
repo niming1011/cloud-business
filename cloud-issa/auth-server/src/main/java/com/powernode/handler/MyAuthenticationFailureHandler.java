@@ -1,10 +1,7 @@
 package com.powernode.handler;
 
 import cn.hutool.json.JSONUtil;
-import com.powernode.constant.AuthConstants;
 import com.powernode.constant.BusinessEnum;
-import com.powernode.model.LoginResult;
-import com.powernode.model.SecurityUser;
 import com.powernode.result.Result;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,8 +17,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.Duration;
-import java.util.UUID;
 
 @Component
 public class MyAuthenticationFailureHandler implements AuthenticationFailureHandler {

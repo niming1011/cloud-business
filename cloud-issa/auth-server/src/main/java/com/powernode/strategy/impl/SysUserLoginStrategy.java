@@ -4,12 +4,10 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.powernode.domain.LoginSysUser;
+import com.powernode.domain.SecurityUser;
 import com.powernode.mapper.LoginSysUserMapper;
-import com.powernode.model.SecurityUser;
 import com.powernode.strategy.LoginStrategy;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.DelegatingFilterProxyRegistrationBean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
