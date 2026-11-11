@@ -1,0 +1,21 @@
+spring:
+  cloud:
+    nacos:
+      server-addr: 192.168.62.130:8848
+      discovery:
+        namespace: 910f1eca-65e0-4d40-b0d4-5c40c9ce57d0
+        group: GATEWAY_GROUP
+        service: ${spring.application.name}
+      config:
+        namespace: ${spring.cloud.nacos.discovery.namespace}
+        group: ${spring.cloud.nacos.discovery.group}
+        prefix: ${spring.application.name}
+        file-extension: yaml
+  application:
+    name: manager-service
+  profiles:
+    active: dev
+  config:
+      import:
+        - nacos:${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+        - nacos:application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}?group=DEFAULT_GROUP&refreshEnabled=true
