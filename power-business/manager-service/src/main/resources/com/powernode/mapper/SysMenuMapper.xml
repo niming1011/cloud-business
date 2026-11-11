@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powernode.mapper.SysMenuMapper">
+
+    <resultMap id="BaseResultMap" type="com.powernode.domain.SysMenu">
+            <id property="menuId" column="menu_id" />
+            <result property="parentId" column="parent_id" />
+            <result property="name" column="name" />
+            <result property="url" column="url" />
+            <result property="perms" column="perms" />
+            <result property="type" column="type" />
+            <result property="icon" column="icon" />
+            <result property="orderNum" column="order_num" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        menu_id,parent_id,name,url,perms,type,
+        icon,order_num
+    </sql>
+</mapper>
