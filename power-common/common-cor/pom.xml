@@ -89,5 +89,6 @@
             <groupId>com.powernode</groupId>
             <artifactId>common-base</artifactId>
         </dependency>
+
     </dependencies>
 </project>

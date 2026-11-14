@@ -1,0 +1,245 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 257949696 bytes. Error detail: G1 virtual space
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   This process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Zero Based Compressed Oops mode in which the Java heap is
+#     placed in the first 32GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 32GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_windows.cpp:3686), pid=22316, tid=20488
+#
+# JRE version:  (21.0.6+7) (build )
+# Java VM: OpenJDK 64-Bit Server VM (21.0.6+7-LTS, mixed mode, emulated-client, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:34851,suspend=y,server=n -javaagent:C:\Users\Administrator\AppData\Local\JetBrains\IntelliJIdea2026.2\captureAgent\debugger-agent.jar=file:///C:/Users/ADMINI~1/AppData/Local/Temp/capture3081476713362841663.props -agentpath:C:\Users\Administrator\AppData\Local\Temp\idea_libasyncProfiler_dll_temp_folder\libasyncProfiler.dll=version,jfr,event=wall,interval=10ms,cstack=no,file=C:\Users\Administrator\IdeaSnapshots\GatewayApplication_2026_11_13_221931.jfr,dbghelppath=C:\Users\Administrator\AppData\Local\Temp\idea_dbghelp_dll_temp_folder\dbghelp.dll,log=C:\Users\Administrator\AppData\Local\Temp\GatewayApplication_2026_11_13_221931.jfr.log.txt,logLevel=DEBUG -XX:TieredStopAtLevel=1 -Dspring.output.ansi.enabled=always -Dcom.sun.management.jmxremote -Dspring.jmx.enabled=true -Dspring.liveBeansView.mbeanDomain -Dspring.application.admin.enabled=true -Dmanagement.endpoints.jmx.exposure.include=* -Dkotlinx.coroutines.debug.enable.creation.stack.trace=false -Ddebugger.agent.enable.coroutines=true -Dkotlinx.coroutines.debug.enable.flows.stack.trace=true -Dkotlinx.coroutines.debug.enable.mutable.state.flows.stack.trace=true -Ddebugger.async.stack.trace.for.all.threads=true -Ddebugger.agent.enable.log.capture=true -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 com.powernode.GatewayApplication
+
+Host: AMD Ryzen 7 5825U with Radeon Graphics         , 16 cores, 15G,  Windows 10 , 64 bit Build 19041 (10.0.19041.7725)
+Time: Fri Nov 13 22:19:31 2026  Windows 10 , 64 bit Build 19041 (10.0.19041.7725) elapsed time: 0.042462 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000011a32b2e360):  JavaThread "Unknown thread" [_thread_in_vm, id=20488, stack(0x0000001232e00000,0x0000001232f00000) (1024K)]
+
+Stack: [0x0000001232e00000,0x0000001232f00000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x6da5e9]
+V  [jvm.dll+0x8b6b73]
+V  [jvm.dll+0x8b8ece]
+V  [jvm.dll+0x8b95b3]
+V  [jvm.dll+0x286256]
+V  [jvm.dll+0x6d6ea5]
+V  [jvm.dll+0x6cabba]
+V  [jvm.dll+0x35f57b]
+V  [jvm.dll+0x367146]
+V  [jvm.dll+0x3b9416]
+V  [jvm.dll+0x3b96e8]
+V  [jvm.dll+0x332c6c]
+V  [jvm.dll+0x33395b]
+V  [jvm.dll+0x87ee59]
+V  [jvm.dll+0x3c65d1]
+V  [jvm.dll+0x868173]
+V  [jvm.dll+0x45a4ee]
+V  [jvm.dll+0x45c171]
+C  [jli.dll+0x52ab]
+C  [ucrtbase.dll+0x21bb2]
+C  [KERNEL32.DLL+0x17384]
+C  [ntdll.dll+0x4cc91]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00007ffc12b2a088, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+Total: 0
+
+Other Threads:
+  0x0000011a3b43a200 WorkerThread "GC Thread#0"                     [id=5784, stack(0x0000001232f00000,0x0000001233000000) (1024K)]
+  0x0000011a3b44a9d0 ConcurrentGCThread "G1 Main Marker"            [id=18372, stack(0x0000001233000000,0x0000001233100000) (1024K)]
+  0x0000011a3b44b3e0 WorkerThread "G1 Conc#0"                       [id=14420, stack(0x0000001233100000,0x0000001233200000) (1024K)]
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffc12225d27]
+VM state: not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00007ffc12b9e420] Heap_lock - owner thread: 0x0000011a32b2e360
+
+Heap address: 0x000000070ae00000, size: 3922 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+
+CDS archive(s) mapped at: [0x0000000000000000-0x0000000000000000-0x0000000000000000), size 0, SharedBaseAddress: 0x0000000800000000, ArchiveRelocationMode: 1.
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0, Narrow klass range: 0x0
+
+GC Precious Log:
+ CardTable entry size: 512
+ Card Set container configuration: InlinePtr #cards 4 size 8 Array Of Cards #cards 16 size 48 Howl #buckets 8 coarsen threshold 3686 Howl Bitmap #cards 512 size 80 coarsen threshold 460 Card regions per heap region 1 cards per card region 4096
+
+Heap:
+ garbage-first heap   total 0K, used 0K [0x000000070ae00000, 0x0000000800000000)
+  region size 2048K, 0 young (0K), 0 survivors (0K)
+
+[error occurred during error reporting (printing heap information), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffc12614059]
+GC Heap History (0 events):
+No events
+
+Dll operation events (2 events):
+Event: 0.036 Loaded shared library D:\jdk21\bin\java.dll
+Event: 0.038 Loaded shared library D:\jdk21\bin\zip.dll
+
+Deoptimization events (0 events):
+No events
+
+Classes loaded (0 events):
+No events
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+ZGC Phase Switch (0 events):
+No events
+
+VM Operations (0 events):
+No events
+
+Memory protections (0 events):
+No events
+
+Nmethod flushes (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff6f45e0000 - 0x00007ff6f45ee000 	D:\jdk21\bin\java.exe
+0x00007ffc74690000 - 0x00007ffc74889000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007ffc72ba0000 - 0x00007ffc72c62000 	C:\Windows\System32\KERNEL32.DLL
+0x00007ffc72370000 - 0x00007ffc72667000 	C:\Windows\System32\KERNELBASE.dll
+0x00007ffc72110000 - 0x00007ffc72210000 	C:\Windows\System32\ucrtbase.dll
+0x00007ffc64650000 - 0x00007ffc6466b000 	D:\jdk21\bin\VCRUNTIME140.dll
+0x00007ffc6e0b0000 - 0x00007ffc6e0c8000 	D:\jdk21\bin\jli.dll
+0x00007ffc73870000 - 0x00007ffc73a0d000 	C:\Windows\System32\USER32.dll
+0x00007ffc720e0000 - 0x00007ffc72102000 	C:\Windows\System32\win32u.dll
+0x00007ffc72910000 - 0x00007ffc7293b000 	C:\Windows\System32\GDI32.dll
+0x00007ffc58c40000 - 0x00007ffc58edb000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.7663_none_60b9ed0b71f50c93\COMCTL32.dll
+0x00007ffc71f90000 - 0x00007ffc720aa000 	C:\Windows\System32\gdi32full.dll
+0x00007ffc72730000 - 0x00007ffc727ce000 	C:\Windows\System32\msvcrt.dll
+0x00007ffc71d70000 - 0x00007ffc71e0d000 	C:\Windows\System32\msvcp_win.dll
+0x00007ffc73a10000 - 0x00007ffc73a3f000 	C:\Windows\System32\IMM32.DLL
+0x00007ffc6e190000 - 0x00007ffc6e19c000 	D:\jdk21\bin\vcruntime140_1.dll
+0x00007ffc42ea0000 - 0x00007ffc42f2d000 	D:\jdk21\bin\msvcp140.dll
+0x00007ffc11ee0000 - 0x00007ffc12c7f000 	D:\jdk21\bin\server\jvm.dll
+0x00007ffc73030000 - 0x00007ffc730e2000 	C:\Windows\System32\ADVAPI32.dll
+0x00007ffc73fa0000 - 0x00007ffc74040000 	C:\Windows\System32\sechost.dll
+0x00007ffc73a40000 - 0x00007ffc73b66000 	C:\Windows\System32\RPCRT4.dll
+0x00007ffc720b0000 - 0x00007ffc720d7000 	C:\Windows\System32\bcrypt.dll
+0x00007ffc72fb0000 - 0x00007ffc73023000 	C:\Windows\System32\WS2_32.dll
+0x00007ffc71b30000 - 0x00007ffc71b7b000 	C:\Windows\SYSTEM32\POWRPROF.dll
+0x00007ffc5e300000 - 0x00007ffc5e327000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007ffc68500000 - 0x00007ffc6850a000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007ffc71b10000 - 0x00007ffc71b22000 	C:\Windows\SYSTEM32\UMPDC.dll
+0x00007ffc704c0000 - 0x00007ffc704d2000 	C:\Windows\SYSTEM32\kernel.appcore.dll
+0x00007ffc6e0e0000 - 0x00007ffc6e0ea000 	D:\jdk21\bin\jimage.dll
+0x00007ffc6fab0000 - 0x00007ffc6fcbb000 	C:\Windows\SYSTEM32\DBGHELP.DLL
+0x00007ffc4b050000 - 0x00007ffc4b085000 	C:\Windows\SYSTEM32\dbgcore.DLL
+0x00007ffc71ce0000 - 0x00007ffc71d62000 	C:\Windows\System32\bcryptPrimitives.dll
+0x00007ffc45d60000 - 0x00007ffc45d9c000 	D:\jdk21\bin\jdwp.dll
+0x00007ffc59a80000 - 0x00007ffc59a8e000 	D:\jdk21\bin\instrument.dll
+0x00007ffc5b260000 - 0x00007ffc5b27f000 	D:\jdk21\bin\java.dll
+0x00007ffc3ac20000 - 0x00007ffc3ae59000 	C:\Users\Administrator\AppData\Local\Temp\idea_libasyncProfiler_dll_temp_folder\libasyncProfiler.dll
+0x00007ffc59b10000 - 0x00007ffc59b28000 	D:\jdk21\bin\zip.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;D:\jdk21\bin;C:\Windows\SYSTEM32;C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.7663_none_60b9ed0b71f50c93;D:\jdk21\bin\server;C:\Users\Administrator\AppData\Local\Temp\idea_libasyncProfiler_dll_temp_folder
+
+VM Arguments:
+jvm_args: -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:34851,suspend=y,server=n -javaagent:C:\Users\Administrator\AppData\Local\JetBrains\IntelliJIdea2026.2\captureAgent\debugger-agent.jar=file:///C:/Users/ADMINI~1/AppData/Local/Temp/capture3081476713362841663.props -agentpath:C:\Users\Administrator\AppData\Local\Temp\idea_libasyncProfiler_dll_temp_folder\libasyncProfiler.dll=version,jfr,event=wall,interval=10ms,cstack=no,file=C:\Users\Administrator\IdeaSnapshots\GatewayApplication_2026_11_13_221931.jfr,dbghelppath=C:\Users\Administrator\AppData\Local\Temp\idea_dbghelp_dll_temp_folder\dbghelp.dll,log=C:\Users\Administrator\AppData\Local\Temp\GatewayApplication_2026_11_13_221931.jfr.log.txt,logLevel=DEBUG -XX:TieredStopAtLevel=1 -Dspring.output.ansi.enabled=always -Dcom.sun.management.jmxremote -Dspring.jmx.enabled=true -Dspring.liveBeansView.mbeanDomain -Dspring.application.admin.enabled=true -Dmanagement.endpoints.jmx.exposure.include=* -Dkotlinx.coroutines.debug.enable.creation.stack.trace=false -Ddebugger.agent.enable.coroutines=true -Dkotlinx.coroutines.debug.enable.flows.stack.trace=true -Dkotlinx.coroutines.debug.enable.mutable.state.flows.stack.trace=true -Ddebugger.async.stack.trace.for.all.threads=true -Ddebugger.agent.enable.log.capture=true -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 
+java_command: com.powernode.GatewayApplication
+java_class_path (initial): D:\ij_idea\java_code\power_mall\cloud-issa\gateway-server\target\classes;D:\apache-maven-3.9.9-bin\repositoryNew\com\alibaba\cloud\spring-cloud-starter-alibaba-nacos-discovery\2025.1.0.0\spring-cloud-starter-alibaba-nacos-discovery-2025.1.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\alibaba\cloud\spring-cloud-alibaba-commons\2025.1.0.0\spring-cloud-alibaba-commons-2025.1.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\alibaba\nacos\nacos-client\3.1.1\nacos-client-3.1.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\alibaba\nacos\nacos-client-basic\3.1.1\nacos-client-basic-3.1.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\alibaba\nacos\nacos-auth-plugin\3.1.1\nacos-auth-plugin-3.1.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\alibaba\nacos\nacos-encryption-plugin\3.1.1\nacos-encryption-plugin-3.1.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\alibaba\nacos\logback-adapter\1.1.4\logback-adapter-1.1.4.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\alibaba\nacos\nacos-log4j2-adapter\3.1.1\nacos-log4j2-adapter-3.1.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\fasterxml\jackson\core\jackson-core\2.20.1\jackson-core-2.20.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\fasterxml\jackson\core\jackson-databind\2.20.1\jackson-databind-2.20.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\fasterxml\jackson\core\jackson-annotations\2.20\jackson-annotations-2.20.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\apache\httpcomponents\client5\httpclient5\5.5.1\httpclient5-5.5.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\apache\httpcomponents\core5\httpcore5-h2\5.3.6\httpcore5-h2-5.3.6.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\apache\httpcomponents\core5\httpcore5\5.3.6\httpcore5-5.3.6.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\prometheus\simpleclient\0.16.0\simpleclient-0.16.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\prometheus\simpleclient_tracer_otel\0.16.0\simpleclient_tracer_otel-0.16.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\prometheus\simpleclient_tracer_common\0.16.0\simpleclient_tracer_common-0.16.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\prometheus\simpleclient_tracer_otel_agent\0.16.0\simpleclient_tracer_otel_agent-0.16.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\yaml\snakeyaml\2.5\snakeyaml-2.5.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\micrometer\micrometer-core\1.16.0\micrometer-core-1.16.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\jspecify\jspecify\1.0.0\jspecify-1.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\micrometer\micrometer-commons\1.16.0\micrometer-commons-1.16.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\micrometer\micrometer-observation\1.16.0\micrometer-observation-1.16.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\hdrhistogram\HdrHistogram\2.2.2\HdrHistogram-2.2.2.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\latencyutils\LatencyUtils\2.0.3\LatencyUtils-2.0.3.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\cloud\spring-cloud-commons\5.0.0\spring-cloud-commons-5.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\security\spring-security-crypto\7.0.0\spring-security-crypto-7.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\cloud\spring-cloud-context\5.0.0\spring-cloud-context-5.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\alibaba\cloud\spring-cloud-starter-alibaba-nacos-config\2025.1.0.0\spring-cloud-starter-alibaba-nacos-config-2025.1.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\alibaba\cloud\spring-alibaba-nacos-config\2025.1.0.0\spring-alibaba-nacos-config-2025.1.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\spring-web\7.0.1\spring-web-7.0.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\spring-beans\7.0.1\spring-beans-7.0.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\spring-core\7.0.1\spring-core-7.0.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\commons-logging\commons-logging\1.3.5\commons-logging-1.3.5.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\slf4j\slf4j-api\2.0.17\slf4j-api-2.0.17.jar;D:\apache-maven-3.9.9-bin\repositoryNew\jakarta\annotation\jakarta.annotation-api\3.0.0\jakarta.annotation-api-3.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\cloud\spring-cloud-starter-gateway-server-webflux\5.0.0\spring-cloud-starter-gateway-server-webflux-5.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\cloud\spring-cloud-starter\5.0.0\spring-cloud-starter-5.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\bouncycastle\bcprov-jdk18on\1.81\bcprov-jdk18on-1.81.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\cloud\spring-cloud-gateway-server-webflux\5.0.0\spring-cloud-gateway-server-webflux-5.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-starter-validation\4.0.0\spring-boot-starter-validation-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-validation\4.0.0\spring-boot-validation-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\apache\tomcat\embed\tomcat-embed-el\11.0.14\tomcat-embed-el-11.0.14.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\hibernate\validator\hibernate-validator\9.0.1.Final\hibernate-validator-9.0.1.Final.jar;D:\apache-maven-3.9.9-bin\repositoryNew\jakarta\validation\jakarta.validation-api\3.1.1\jakarta.validation-api-3.1.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\jboss\logging\jboss-logging\3.6.1.Final\jboss-logging-3.6.1.Final.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\fasterxml\classmate\1.7.1\classmate-1.7.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\projectreactor\addons\reactor-extra\3.6.0\reactor-extra-3.6.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-starter-webflux\4.0.0\spring-boot-starter-webflux-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-starter-jackson\4.0.0\spring-boot-starter-jackson-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-jackson\4.0.0\spring-boot-jackson-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\tools\jackson\core\jackson-databind\3.0.2\jackson-databind-3.0.2.jar;D:\apache-maven-3.9.9-bin\repositoryNew\tools\jackson\core\jackson-core\3.0.2\jackson-core-3.0.2.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-starter-reactor-netty\4.0.0\spring-boot-starter-reactor-netty-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-reactor\4.0.0\spring-boot-reactor-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-reactor-netty\4.0.0\spring-boot-reactor-netty-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\projectreactor\netty\reactor-netty-http\1.3.0\reactor-netty-http-1.3.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-codec-http\4.2.7.Final\netty-codec-http-4.2.7.Final.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-codec-compression\4.2.7.Final\netty-codec-compression-4.2.7.Final.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-codec-http2\4.2.7.Final\netty-codec-http2-4.2.7.Final.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-codec-http3\4.2.7.Final\netty-codec-http3-4.2.7.Final.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-codec-classes-quic\4.2.7.Final\netty-codec-classes-quic-4.2.7.Final.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-codec-native-quic\4.2.7.Final\netty-codec-native-quic-4.2.7.Final-linux-x86_64.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-codec-native-quic\4.2.7.Final\netty-codec-native-quic-4.2.7.Final-linux-aarch_64.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-codec-native-quic\4.2.7.Final\netty-codec-native-quic-4.2.7.Final-osx-x86_64.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-codec-native-quic\4.2.7.Final\netty-codec-native-quic-4.2.7.Final-osx-aarch_64.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-codec-native-quic\4.2.7.Final\netty-codec-native-quic-4.2.7.Final-windows-x86_64.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-resolver-dns-native-macos\4.2.7.Final\netty-resolver-dns-native-macos-4.2.7.Final-osx-x86_64.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-resolver-dns-classes-macos\4.2.7.Final\netty-resolver-dns-classes-macos-4.2.7.Final.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-transport-native-epoll\4.2.7.Final\netty-transport-native-epoll-4.2.7.Final-linux-x86_64.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-transport-classes-epoll\4.2.7.Final\netty-transport-classes-epoll-4.2.7.Final.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\projectreactor\netty\reactor-netty-core\1.3.0\reactor-netty-core-1.3.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-handler-proxy\4.2.7.Final\netty-handler-proxy-4.2.7.Final.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-codec-socks\4.2.7.Final\netty-codec-socks-4.2.7.Final.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-webflux\4.0.0\spring-boot-webflux-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-http-codec\4.0.0\spring-boot-http-codec-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\spring-webflux\7.0.1\spring-webflux-7.0.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-web-server\4.0.0\spring-boot-web-server-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\cloud\spring-cloud-starter-loadbalancer\5.0.0\spring-cloud-starter-loadbalancer-5.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\cloud\spring-cloud-loadbalancer\5.0.0\spring-cloud-loadbalancer-5.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\projectreactor\reactor-core\3.8.0\reactor-core-3.8.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\reactivestreams\reactive-streams\1.0.4\reactive-streams-1.0.4.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-starter-cache\4.0.0\spring-boot-starter-cache-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-cache\4.0.0\spring-boot-cache-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\spring-context-support\7.0.1\spring-context-support-7.0.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\stoyanr\evictor\1.0.0\evictor-1.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-starter-data-redis\4.0.0\spring-boot-starter-data-redis-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-starter\4.0.0\spring-boot-starter-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-starter-logging\4.0.0\spring-boot-starter-logging-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\ch\qos\logback\logback-classic\1.5.21\logback-classic-1.5.21.jar;D:\apache-maven-3.9.9-bin\repositoryNew\ch\qos\logback\logback-core\1.5.21\logback-core-1.5.21.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\apache\logging\log4j\log4j-to-slf4j\2.25.2\log4j-to-slf4j-2.25.2.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\apache\logging\log4j\log4j-api\2.25.2\log4j-api-2.25.2.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\slf4j\jul-to-slf4j\2.0.17\jul-to-slf4j-2.0.17.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-autoconfigure\4.0.0\spring-boot-autoconfigure-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-data-redis\4.0.0\spring-boot-data-redis-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot\4.0.0\spring-boot-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\spring-context\7.0.1\spring-context-7.0.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\spring-expression\7.0.1\spring-expression-7.0.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-data-commons\4.0.0\spring-boot-data-commons-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-persistence\4.0.0\spring-boot-persistence-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\data\spring-data-commons\4.0.0\spring-data-commons-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-transaction\4.0.0\spring-boot-transaction-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\spring-tx\7.0.1\spring-tx-7.0.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\lettuce\lettuce-core\6.8.1.RELEASE\lettuce-core-6.8.1.RELEASE.jar;D:\apache-maven-3.9.9-bin\repositoryNew\redis\clients\authentication\redis-authx-core\0.1.1-beta2\redis-authx-core-0.1.1-beta2.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-common\4.2.7.Final\netty-common-4.2.7.Final.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-handler\4.2.7.Final\netty-handler-4.2.7.Final.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-resolver\4.2.7.Final\netty-resolver-4.2.7.Final.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-buffer\4.2.7.Final\netty-buffer-4.2.7.Final.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-transport-native-unix-common\4.2.7.Final\netty-transport-native-unix-common-4.2.7.Final.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-codec-base\4.2.7.Final\netty-codec-base-4.2.7.Final.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-transport\4.2.7.Final\netty-transport-4.2.7.Final.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-resolver-dns\4.2.7.Final\netty-resolver-dns-4.2.7.Final.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\netty\netty-codec-dns\4.2.7.Final\netty-codec-dns-4.2.7.Final.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\data\spring-data-redis\4.0.0\spring-data-redis-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\data\spring-data-keyvalue\4.0.0\spring-data-keyvalue-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\spring-oxm\7.0.1\spring-oxm-7.0.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\jakarta\xml\bind\jakarta.xml.bind-api\4.0.4\jakarta.xml.bind-api-4.0.4.jar;D:\apache-maven-3.9.9-bin\repositoryNew\jakarta\activation\jakarta.activation-api\2.1.4\jakarta.activation-api-2.1.4.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\spring-aop\7.0.1\spring-aop-7.0.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-netty\4.0.0\spring-boot-netty-4.0.0.jar;D:\ij_idea\java_code\power_mall\power-common\common-base\target\classes;D:\apache-maven-3.9.9-bin\repositoryNew\com\baomidou\mybatis-plus-spring-boot4-starter\3.5.17\mybatis-plus-spring-boot4-starter-3.5.17.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\baomidou\mybatis-plus\3.5.17\mybatis-plus-3.5.17.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\baomidou\mybatis-plus-core\3.5.17\mybatis-plus-core-3.5.17.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\baomidou\mybatis-plus-annotation\3.5.17\mybatis-plus-annotation-3.5.17.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\baomidou\mybatis-plus-spring\3.5.17\mybatis-plus-spring-3.5.17.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\baomidou\mybatis-plus-extension\3.5.17\mybatis-plus-extension-3.5.17.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\mybatis\mybatis\3.5.19\mybatis-3.5.19.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\mybatis\mybatis-spring\4.0.0\mybatis-spring-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\baomidou\mybatis-plus-spring-boot-autoconfigure\3.5.17\mybatis-plus-spring-boot-autoconfigure-3.5.17.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\baomidou\mybatis-plus-spring-boot-native-image\3.5.17\mybatis-plus-spring-boot-native-image-3.5.17.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-starter-jdbc\4.0.0\spring-boot-starter-jdbc-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-jdbc\4.0.0\spring-boot-jdbc-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-sql\4.0.0\spring-boot-sql-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\spring-jdbc\7.0.1\spring-jdbc-7.0.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\zaxxer\HikariCP\7.0.2\HikariCP-7.0.2.jar;D:\apache-maven-3.9.9-bin\repositoryNew\cn\hutool\hutool-all\5.8.48\hutool-all-5.8.48.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springdoc\springdoc-openapi-starter-webmvc-ui\3.0.1\springdoc-openapi-starter-webmvc-ui-3.0.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springdoc\springdoc-openapi-starter-webmvc-api\3.0.1\springdoc-openapi-starter-webmvc-api-3.0.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springdoc\springdoc-openapi-starter-common\3.0.1\springdoc-openapi-starter-common-3.0.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\swagger\core\v3\swagger-core-jakarta\2.2.41\swagger-core-jakarta-2.2.41.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\apache\commons\commons-lang3\3.19.0\commons-lang3-3.19.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\swagger\core\v3\swagger-annotations-jakarta\2.2.41\swagger-annotations-jakarta-2.2.41.jar;D:\apache-maven-3.9.9-bin\repositoryNew\io\swagger\core\v3\swagger-models-jakarta\2.2.41\swagger-models-jakarta-2.2.41.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\fasterxml\jackson\dataformat\jackson-dataformat-yaml\2.20.1\jackson-dataformat-yaml-2.20.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.20.1\jackson-datatype-jsr310-2.20.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-webmvc\4.0.0\spring-boot-webmvc-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-servlet\4.0.0\spring-boot-servlet-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\spring-webmvc\7.0.1\spring-webmvc-7.0.1.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\springframework\boot\spring-boot-http-converter\4.0.0\spring-boot-http-converter-4.0.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\webjars\swagger-ui\5.31.0\swagger-ui-5.31.0.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\webjars\webjars-locator-lite\1.1.2\webjars-locator-lite-1.1.2.jar;D:\apache-maven-3.9.9-bin\repositoryNew\org\projectlombok\lombok\1.18.42\lombok-1.18.42.jar;D:\ij_idea\IntelliJ IDEA 2026.2.2\lib\idea_rt.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 12                                        {product} {ergonomic}
+     uint ConcGCThreads                            = 3                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 13                                        {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 2097152                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 257949696                                 {product} {ergonomic}
+     bool ManagementServer                         = true                                      {product} {command line}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 4112515072                                {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 2097152                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 4096                                   {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 0                                      {pd product} {ergonomic}
+     bool ProfileInterpreter                       = false                                  {pd product} {command line}
+    uintx ProfiledCodeHeapSize                     = 0                                      {pd product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 4112515072                             {manageable} {ergonomic}
+     intx TieredStopAtLevel                        = 1                                         {product} {command line}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags foldmultilines=false
+ #1: stderr all=off uptime,level,tags foldmultilines=false
+
+Environment Variables:
+JAVA_HOME=D:\jdk21
+CLASSPATH=.;E:\Apache_tomcat\apache-tomcat-11.0.5\apache-tomcat-11.0.5\lib\servlet-api.jar;
+PATH=E:\VMware\bin\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;D:\python;D:\python\Scripts;E:\Git\cmd;E:\Mingw\x86_64-8.1.0-release-win32-seh-rt_v6-rev0\bin;D:\jdk21\bin;D:\mySql\mysql-8.4.4-winx64\mysql-8.4.4-winx64\bin;E:\Apache_tomcat\apache-tomcat-11.0.5\apache-tomcat-11.0.5\bin;D:\apache-maven-3.9.9-bin\apache-maven-3.9.9\bin;D:\Anaconda;D:\Anaconda\Scripts;D:\Anaconda\Library\bin;D:\npm-global;C:\Program Files\Go\bin;E:\texlive\2026\bin\windows;D:\Lua\5.1;D:\Lua\5.1\clibs;E:\.nodejs;C:\Users\Administrator\AppData\Local\Author Software\nvm\.nodejs;E:\msys64\mingw64\bin;E:\VMware\bin\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;D:\Windows Kits\10\Windows Performance Toolkit\;D:\MatlabR2018b\runtime\win64;D:\MatlabR2018b\bin;D:\python;D:\python\Scripts;E:\Git\cmd;D:\jdk21\bin;D:\mySql\mysql-8.4.4-winx64\mysql-8.4.4-winx64\bin;E:\Apache_tomcat\apache-tomcat-11.0.5\apache-tomcat-11.0.5\bin;D:\apache-maven-3.9.9-bin\apache-maven-3.9.9\bin;C:\Program Files\nodejs\;D:\Anaconda;D:\Anaconda\Scripts;D:\Anaconda\Library\bin;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;D:\pycharm\PyCharm 2025.3.1\bin;E:\Microsoft VS Code\bin;D:\ij_idea\IntelliJ IDEA Community Edition 2024.3.4.1\bin;D:\ollama-windows-amd64;C:\Users\Administrator\go\bin;D:\ij_idea\IntelliJ IDEA 2026.2.2\bin;E:\texlive\2026\bin\windows
+USERNAME=Administrator
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD
+TMP=C:\Users\ADMINI~1\AppData\Local\Temp
+TEMP=C:\Users\ADMINI~1\AppData\Local\Temp
+
+
+
+
+Periodic native trim disabled
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 10 , 64 bit Build 19041 (10.0.19041.7725)
+OS uptime: 9 days 8:40 hours
+Hyper-V role detected
+
+CPU: total 16 (initial active 16) (16 cores per cpu, 2 threads per core) family 25 model 80 stepping 0 microcode 0x0, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4a, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, adx, sha, fma, vzeroupper, clflush, clflushopt, hv, rdtscp, rdpid, fsrm, f16c, cet_ss
+Processor Information for the first 16 processors :
+  Max Mhz: 2000, Current Mhz: 2000, Mhz Limit: 2000
+
+Memory: 4k page, system-wide physical 15681M (448M free)
+TotalPageFile size 17729M (AvailPageFile size 134M)
+current process WorkingSet (physical memory assigned to process): 12M, peak: 12M
+current process commit charge ("private bytes"): 77M, peak: 323M
+
+vm_info: OpenJDK 64-Bit Server VM (21.0.6+7-LTS) for windows-amd64 JRE (21.0.6+7-LTS), built on 2025-01-07T23:42:01Z by "Administrator" with MS VC++ 16.10 / 16.11 (VS2019)
+
+END.

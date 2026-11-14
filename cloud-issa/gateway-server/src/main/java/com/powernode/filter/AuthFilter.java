@@ -1,7 +1,7 @@
 package com.powernode.filter;
 
-import cn.hutool.core.util.SerializeUtil;
-import cn.hutool.json.ObjectMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.powernode.config.WhiteUrlsConfig;
 import com.powernode.constant.BusinessEnum;
 import com.powernode.result.Result;
@@ -11,6 +11,7 @@ import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -35,13 +36,20 @@ public class AuthFilter implements GlobalFilter, Ordered {
         }else{
             String authorization = request.getHeaders().getFirst(AuthConstants.AUTHORIZATION);
             String token = authorization.replaceFirst(AuthConstants.BEARER, "");
+
             if(StringUtils.hasText(token)&&redisTemplate.hasKey(AuthConstants.LOGIN_TOKEN_PREFIX+token)){
                 return chain.filter(exchange);
             }
             ServerHttpResponse response = exchange.getResponse();
             response.getHeaders().set("Content-Type","application/json;charset=utf-8");
             Result fail = Result.fail(BusinessEnum.UN_AUTHORIZATION);
-            byte[] serialize = SerializeUtil.serialize(fail);
+            ObjectMapper objectMapper = new ObjectMapper();
+            byte[] serialize = null;
+            try {
+                serialize = objectMapper.writeValueAsBytes(fail);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
 
             DataBuffer dataBuffer=response.bufferFactory().wrap(serialize);
             return response.writeWith(Mono.just(dataBuffer));

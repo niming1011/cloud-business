@@ -4,7 +4,11 @@ import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.powernode.domain.SysMenu;
 import com.powernode.service.SysMenuService;
 import com.powernode.mapper.SysMenuMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
 * @author Administrator
@@ -14,7 +18,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu>
     implements SysMenuService{
+    @Autowired
+    private SysMenuMapper sysMenuMapper;
+    @Override
+    public Set<SysMenu> selectMenuPermsByUserId(Long userId) {
+        Set<SysMenu> sysMenus = sysMenuMapper.selectMenuPermsByUserId(userId);
+        return transformTree(sysMenus,0L);
 
+    }
+
+    private Set<SysMenu> transformTree(Set<SysMenu> sysMenus,Long pid) {
+        Set<SysMenu> root = sysMenus.stream().filter(m -> m.getParentId().equals(pid)).collect(Collectors.toSet());
+        root.forEach(r->r.setList(transformTree(sysMenus,r.getMenuId())));
+        return root;
+    }
 }
 
 

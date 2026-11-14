@@ -1,8 +1,11 @@
 package com.powernode.domain;
 
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+
+import java.util.Set;
 
 @Data
 public class SysMenu {
@@ -22,4 +25,7 @@ public class SysMenu {
     private String icon;
     @Schema(description="排序")
     private Integer orderNum;
+    @TableField(exist = false)
+    @Schema(description = "子节点集合")
+    private Set<SysMenu> list;
 }

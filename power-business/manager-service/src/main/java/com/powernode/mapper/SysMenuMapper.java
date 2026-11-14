@@ -2,6 +2,9 @@ package com.powernode.mapper;
 
 import com.powernode.domain.SysMenu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.Set;
 
 /**
 * @author Administrator
@@ -9,8 +12,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2026-11-11 18:44:30
 * @Entity com.powernode.domain.SysMenu
 */
+
 public interface SysMenuMapper extends BaseMapper<SysMenu> {
 
+    Set<SysMenu> selectMenuPermsByUserId(Long userId);
 }
 
 

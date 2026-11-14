@@ -21,7 +21,7 @@ public class SecurityUser implements UserDetails {
     private Integer status;
     private Long shopId;
     private String loginType;
-    private Set<String> perms;
+    private Set<String> perms = new HashSet<>();
     //loginMemberUser信息
 
 
