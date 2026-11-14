@@ -1,28 +1,125 @@
 package com.powernode.domain;
 
-
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import java.io.Serializable;
 import java.util.Date;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+/**
+ * 系统用户
+ * @TableName sys_user
+ */
+@TableName(value ="sys_user")
 @Data
-public class SysUser {
-    @Schema(description="")
+public class SysUser implements Serializable {
+    /**
+     * 
+     */
+    @TableId(type = IdType.AUTO)
     private Long userId;
-    @Schema(description="用户名")
+
+    /**
+     * 用户名
+     */
     private String username;
-    @Schema(description="密码")
+
+    /**
+     * 密码
+     */
     private String password;
-    @Schema(description="邮箱")
+
+    /**
+     * 邮箱
+     */
     private String email;
-    @Schema(description="手机号")
+
+    /**
+     * 手机号
+     */
     private String mobile;
-    @Schema(description="状态  0：禁用   1：正常")
+
+    /**
+     * 状态  0：禁用   1：正常
+     */
     private Integer status;
-    @Schema(description="创建者ID")
+
+    /**
+     * 创建者ID
+     */
     private Long createUserId;
-    @Schema(description="创建时间")
+
+    /**
+     * 创建时间
+     */
     private Date createTime;
-    @Schema(description="用户所在的商城Id")
+
+    /**
+     * 用户所在的商城Id
+     */
     private Long shopId;
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        SysUser other = (SysUser) that;
+        return (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+            && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
+            && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
+            && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
+            && (this.getMobile() == null ? other.getMobile() == null : this.getMobile().equals(other.getMobile()))
+            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
+            && (this.getCreateUserId() == null ? other.getCreateUserId() == null : this.getCreateUserId().equals(other.getCreateUserId()))
+            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
+            && (this.getShopId() == null ? other.getShopId() == null : this.getShopId().equals(other.getShopId()));
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
+        result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
+        result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
+        result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
+        result = prime * result + ((getMobile() == null) ? 0 : getMobile().hashCode());
+        result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
+        result = prime * result + ((getCreateUserId() == null) ? 0 : getCreateUserId().hashCode());
+        result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
+        result = prime * result + ((getShopId() == null) ? 0 : getShopId().hashCode());
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", userId=").append(userId);
+        sb.append(", username=").append(username);
+        sb.append(", password=").append(password);
+        sb.append(", email=").append(email);
+        sb.append(", mobile=").append(mobile);
+        sb.append(", status=").append(status);
+        sb.append(", createUserId=").append(createUserId);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", shopId=").append(shopId);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
+    }
 }
