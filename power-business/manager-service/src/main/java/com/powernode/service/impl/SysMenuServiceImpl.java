@@ -5,6 +5,8 @@ import com.powernode.domain.SysMenu;
 import com.powernode.service.SysMenuService;
 import com.powernode.mapper.SysMenuMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -16,11 +18,13 @@ import java.util.stream.Collectors;
 * @createDate 2026-11-11 18:44:30
 */
 @Service
+@CacheConfig(cacheNames = "com.powernode.service.impl.SysMenuServiceImpl")
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu>
     implements SysMenuService{
     @Autowired
     private SysMenuMapper sysMenuMapper;
     @Override
+    @Cacheable(key="#userId")
     public Set<SysMenu> selectMenuPermsByUserId(Long userId) {
         Set<SysMenu> sysMenus = sysMenuMapper.selectMenuPermsByUserId(userId);
         return transformTree(sysMenus,0L);

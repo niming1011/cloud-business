@@ -2,13 +2,16 @@ package com.powernode.domain;
 
 
 import com.baomidou.mybatisplus.annotation.TableField;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Set;
-
 @Data
-public class SysMenu {
+public class SysMenu implements Serializable {
     @Schema(description="")
     private Long menuId;
     @Schema(description="父菜单ID，一级菜单为0")
@@ -27,5 +30,6 @@ public class SysMenu {
     private Integer orderNum;
     @TableField(exist = false)
     @Schema(description = "子节点集合")
+    @JsonIgnoreProperties
     private Set<SysMenu> list;
 }
