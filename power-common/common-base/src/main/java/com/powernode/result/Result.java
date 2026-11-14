@@ -32,4 +32,8 @@ public class Result implements Serializable {
     public static Result fail(BusinessEnum businessEnum){
         return  Result.builder().code(businessEnum.getCode()).msg(businessEnum.getDesc()).build();
     }
+
+    public static Result handle(boolean save) {
+        return save?Result.success(null):Result.fail(BusinessEnum.OPERATION_FAIL);
+    }
 }

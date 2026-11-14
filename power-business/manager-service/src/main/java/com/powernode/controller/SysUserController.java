@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("sys/user")
 @Tag(name = "系统管理员接口")
@@ -50,4 +47,11 @@ public class SysUserController {
         return Result.success(sysUserPage);
 
     }
+        @PostMapping
+        @PreAuthorize("hasAuthority('sys:user:save')")
+        @Operation(description = "新增管理员")
+        public Result saveSysUser(@RequestBody SysUser sysUser) {
+            boolean save = sysUserService.saveSysUser(sysUser);
+            return Result.handle(save);
+        }
 }

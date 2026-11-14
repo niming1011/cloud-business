@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 import lombok.Data;
 
 /**
@@ -60,6 +62,9 @@ public class SysUser implements Serializable {
      * 用户所在的商城Id
      */
     private Long shopId;
+
+    @TableField(exist = false)
+    private List<Long> roleIdList;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
