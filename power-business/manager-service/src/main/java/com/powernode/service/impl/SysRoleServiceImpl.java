@@ -83,6 +83,30 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole>
         }
         return sysRole;
     }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    @CacheEvict(key=ManagerConstant.SYS_ROLE_LIST_KEY)
+    public boolean modifySysRoleInfo(SysRole sysRole) {
+        Long roleId = sysRole.getRoleId();
+        int i = sysRoleMapper.updateById(sysRole);
+        if(i>=1) {
+            sysRoleMenuMapper.delete(new LambdaQueryWrapper<SysRoleMenu>()
+                    .eq(SysRoleMenu::getRoleId, roleId));
+            List<Long> menuIdList = sysRole.getMenuIdList();
+            if(CollectionUtil.isNotEmpty(menuIdList)&&!menuIdList.isEmpty()){
+                List<SysRoleMenu> sysRoleMenuList=new ArrayList<>();
+                menuIdList.forEach(menuId->{
+                    SysRoleMenu sysRoleMenu = new SysRoleMenu();
+                    sysRoleMenu.setMenuId(menuId);
+                    sysRoleMenu.setRoleId(sysRole.getRoleId());
+                    sysRoleMenuList.add(sysRoleMenu);
+                });
+                return sysRoleMenuService.saveBatch(sysRoleMenuList);
+            }
+        }
+        return false;
+    }
 }
 
 

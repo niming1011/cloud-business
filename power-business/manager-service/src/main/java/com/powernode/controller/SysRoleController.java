@@ -57,5 +57,12 @@ public class SysRoleController {
         SysRole sysRole=sysRoleService.querySysRoleInfo(roleId);
         return Result.success(sysRole);
     }
+    @PutMapping
+    @PreAuthorize("hasAuthority('sys:role:update')")
+    @Operation(description = "修改角色信息")
+    public Result modifySysRoleInfo(@RequestBody SysRole sysRole) {
+        boolean modify=sysRoleService.modifySysRoleInfo(sysRole);
+        return Result.handle(modify);
+    }
 
 }
