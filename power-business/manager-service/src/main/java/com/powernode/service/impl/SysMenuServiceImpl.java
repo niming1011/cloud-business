@@ -1,6 +1,8 @@
 package com.powernode.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
+import com.powernode.constant.ManagerConstant;
 import com.powernode.domain.SysMenu;
 import com.powernode.service.SysMenuService;
 import com.powernode.mapper.SysMenuMapper;
@@ -9,6 +11,7 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -35,6 +38,13 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu>
         Set<SysMenu> root = sysMenus.stream().filter(m -> m.getParentId().equals(pid)).collect(Collectors.toSet());
         root.forEach(r->r.setList(transformTree(sysMenus,r.getMenuId())));
         return root;
+    }
+
+    @Override
+    @Cacheable(key= ManagerConstant.SYS_ALL_MENU_KEY)
+    public List<SysMenu> queryAllMenuList() {
+        List<SysMenu> sysMenuList = sysMenuMapper.selectList(new LambdaQueryWrapper<SysMenu>());
+        return sysMenuList;
     }
 }
 

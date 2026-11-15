@@ -2,4 +2,5 @@ package com.powernode.constant;
 
 public interface ManagerConstant {
      String SYS_ROLE_LIST_KEY="'roles'" ;
+     String SYS_ALL_MENU_KEY="'menus'";
 }

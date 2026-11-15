@@ -3,6 +3,7 @@ package com.powernode.service;
 import com.powernode.domain.SysMenu;
 import com.baomidou.mybatisplus.spring.service.IService;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,4 +14,6 @@ import java.util.Set;
 public interface SysMenuService extends IService<SysMenu> {
 
     Set<SysMenu> selectMenuPermsByUserId(Long userId);
+
+    List<SysMenu> queryAllMenuList();
 }

@@ -8,11 +8,13 @@ import com.powernode.vo.MenuAndAuth;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Set;
 
 @Tag(name="系统权限接口管理")
@@ -34,5 +36,12 @@ public class SysMenuController {
         MenuAndAuth menuAndAuth = new MenuAndAuth(perms, sysMenus);
         Result success = Result.success(menuAndAuth);
         return success;
+    }
+    @GetMapping("table")
+    @PreAuthorize("hasAuthority('sys:menu:list')")
+    @Operation(description = "查询系统所有权限集合")
+    public Result loadAllMenuList(){
+       List<SysMenu> sysMenuList= sysMenuService.queryAllMenuList();
+        return Result.success(sysMenuList);
     }
 }
