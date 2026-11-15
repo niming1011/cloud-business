@@ -7,7 +7,9 @@ import com.powernode.service.SysMenuService;
 import com.powernode.vo.MenuAndAuth;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -63,5 +65,13 @@ public class SysMenuController {
     public Result modifySysMenu(@RequestBody SysMenu sysMenu) {
         boolean modify=sysMenuService.modifySysMenu(sysMenu);
         return Result.handle(modify);
+    }
+
+    @DeleteMapping("{menuId}")
+    @PreAuthorize("hasAuthority('sys:menu:delete')")
+    @Operation(description = "删除菜单权限")
+    public Result removeSysMenu(@PathVariable Long menuId) {
+        boolean remove=sysMenuService.removeSysMenu(menuId);
+        return Result.handle(remove);
     }
 }

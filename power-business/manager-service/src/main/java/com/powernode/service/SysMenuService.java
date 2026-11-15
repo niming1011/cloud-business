@@ -20,4 +20,6 @@ public interface SysMenuService extends IService<SysMenu> {
     boolean saveSysMenu(SysMenu sysMenu);
 
     boolean modifySysMenu(SysMenu sysMenu);
+
+    boolean removeSysMenu(Long menuId);
 }

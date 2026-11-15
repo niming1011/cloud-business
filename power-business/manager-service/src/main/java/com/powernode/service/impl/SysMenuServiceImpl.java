@@ -1,9 +1,12 @@
 package com.powernode.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
+import com.powernode.constant.BusinessEnum;
 import com.powernode.constant.ManagerConstant;
 import com.powernode.domain.SysMenu;
+import com.powernode.exception.BusinessException;
 import com.powernode.service.SysMenuService;
 import com.powernode.mapper.SysMenuMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +65,17 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu>
         }
         return sysMenuMapper.updateById(sysMenu)>=1;
 
+    }
+
+    @Override
+    @CacheEvict(key=ManagerConstant.SYS_ALL_MENU_KEY)
+    public boolean removeSysMenu(Long menuId) {
+        List<SysMenu> childMenuList = sysMenuMapper.selectList(new LambdaQueryWrapper<SysMenu>()
+                .eq(SysMenu::getParentId, menuId));
+        if(CollectionUtil.isNotEmpty(childMenuList) || !childMenuList.isEmpty()){
+            throw new BusinessException("当前菜单节点包含子节点集合，无法删除");
+        }
+        return  sysMenuMapper.deleteById(menuId)>=1;
     }
 }
 
