@@ -10,9 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
@@ -43,5 +41,27 @@ public class SysMenuController {
     public Result loadAllMenuList(){
        List<SysMenu> sysMenuList= sysMenuService.queryAllMenuList();
         return Result.success(sysMenuList);
+    }
+
+    @PostMapping
+    @PreAuthorize("hasAuthority('sys:menu:save')")
+    @Operation(description = "新增权限")
+    public Result saveSysMenu(@RequestBody SysMenu sysMenu) {
+        boolean save = sysMenuService.saveSysMenu(sysMenu);
+        return Result.handle(save);
+    }
+    @GetMapping("info/{menuId}")
+    @PreAuthorize("hasAuthority('sys:menu:info')")
+    @Operation(description = "根据标识查询菜单权限详细信息")
+    public Result loadSysMenuInfo(@PathVariable Long menuId) {
+        SysMenu byId = sysMenuService.getById(menuId);
+        return Result.success(byId);
+    }
+    @PutMapping
+    @PreAuthorize("hasAuthority('sys:menu:update')")
+    @Operation(description = "修改菜单权限信息")
+    public Result modifySysMenu(@RequestBody SysMenu sysMenu) {
+        boolean modify=sysMenuService.modifySysMenu(sysMenu);
+        return Result.handle(modify);
     }
 }

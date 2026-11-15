@@ -8,6 +8,7 @@ import com.powernode.service.SysMenuService;
 import com.powernode.mapper.SysMenuMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +46,22 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu>
     public List<SysMenu> queryAllMenuList() {
         List<SysMenu> sysMenuList = sysMenuMapper.selectList(new LambdaQueryWrapper<SysMenu>());
         return sysMenuList;
+    }
+
+    @Override
+    @CacheEvict(key = ManagerConstant.SYS_ALL_MENU_KEY)
+    public boolean saveSysMenu(SysMenu sysMenu) {
+        return sysMenuMapper.insert(sysMenu)>=1;
+    }
+
+    @Override
+    @CacheEvict(key=ManagerConstant.SYS_ALL_MENU_KEY)
+    public boolean modifySysMenu(SysMenu sysMenu) {
+        if(sysMenu.getType()==0){
+            sysMenu.setParentId(0L);
+        }
+        return sysMenuMapper.updateById(sysMenu)>=1;
+
     }
 }
 
