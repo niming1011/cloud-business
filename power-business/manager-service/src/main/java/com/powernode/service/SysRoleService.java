@@ -13,4 +13,8 @@ import java.util.List;
 public interface SysRoleService extends IService<SysRole> {
 
     List<SysRole> queryAllRoles();
+
+    boolean saveSysRole(SysRole sysRole);
+
+    SysRole querySysRoleInfo(Long roleId);
 }

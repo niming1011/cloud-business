@@ -11,10 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,6 +40,22 @@ public class SysRoleController {
         page=sysRoleService.page(page,new LambdaQueryWrapper<SysRole>()
                 .like(StringUtils.hasText(roleName),SysRole::getRoleName,roleName));
         return Result.success(page);
+    }
+
+    @PostMapping
+    @PreAuthorize("hasAuthority('sys:role:save')")
+    @Operation(description = "新增角色")
+    public Result saveSysRole(@RequestBody SysRole sysRole) {
+        boolean save=sysRoleService.saveSysRole(sysRole);
+        return Result.handle(save);
+    }
+
+    @GetMapping("info/{roleId}")
+    @PreAuthorize("hasAuthority('sys:role:info')")
+    @Operation(description = "根据标识查询角色详情")
+    public Result querySysRoleInfo(@PathVariable Long roleId) {
+        SysRole sysRole=sysRoleService.querySysRoleInfo(roleId);
+        return Result.success(sysRole);
     }
 
 }

@@ -81,7 +81,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public boolean modifySysUserInfo(SysUser sysUser) {
         sysUserRoleMapper.delete(new LambdaQueryWrapper<SysUserRole>()
                 .eq(SysUserRole::getUserId, sysUser.getUserId()));
