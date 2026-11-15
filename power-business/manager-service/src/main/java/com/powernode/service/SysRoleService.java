@@ -19,4 +19,6 @@ public interface SysRoleService extends IService<SysRole> {
     SysRole querySysRoleInfo(Long roleId);
 
     boolean modifySysRoleInfo(SysRole sysRole);
+
+    boolean removeSysRoleByIds(List<Long> sysRoleIds);
 }

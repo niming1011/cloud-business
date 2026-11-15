@@ -107,6 +107,14 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole>
         }
         return false;
     }
+
+    @Override
+    public boolean removeSysRoleByIds(List<Long> sysRoleIds) {
+        sysRoleMenuMapper.delete(new LambdaQueryWrapper<SysRoleMenu>()
+                .in(SysRoleMenu::getRoleId,sysRoleIds));
+        int deleteByIds = sysRoleMapper.deleteByIds(sysRoleIds);
+        return deleteByIds==sysRoleIds.size();
+    }
 }
 
 

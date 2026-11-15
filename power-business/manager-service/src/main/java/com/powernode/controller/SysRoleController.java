@@ -65,4 +65,11 @@ public class SysRoleController {
         return Result.handle(modify);
     }
 
+    @DeleteMapping
+    @PreAuthorize("hasAuthority('sys:role:delete')")
+    @Operation(description = "批量/单个删除角色")
+    public Result removeSysRoleByIdList(@RequestBody List<Long> sysRoleIds) {
+        boolean remove=sysRoleService.removeSysRoleByIds(sysRoleIds);
+        return Result.handle(remove);
+    }
 }
