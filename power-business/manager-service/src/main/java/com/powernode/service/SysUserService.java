@@ -3,6 +3,8 @@ package com.powernode.service;
 import com.powernode.domain.SysUser;
 import com.baomidou.mybatisplus.spring.service.IService;
 
+import java.util.List;
+
 /**
 * @author Administrator
 * @description 针对表【sys_user(系统用户)】的数据库操作Service
@@ -15,4 +17,6 @@ public interface SysUserService extends IService<SysUser> {
     SysUser querySysUserInfoById(Long id);
 
     boolean modifySysUserInfo(SysUser sysUser);
+
+    boolean removeSysUserByIds(List<Long> ids);
 }

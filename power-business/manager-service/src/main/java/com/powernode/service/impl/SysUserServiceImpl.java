@@ -103,6 +103,15 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
         int updateById = sysUserMapper.updateById(sysUser);
         return saveBatch&&updateById==1;
     }
+
+    @Override
+    public boolean removeSysUserByIds(List<Long> ids) {
+        boolean remove = sysUserRoleService.remove(new LambdaQueryWrapper<SysUserRole>()
+                .in(SysUserRole::getUserId, ids));
+        int deleteByIds = sysUserMapper.deleteByIds(ids);
+        return remove&&deleteByIds>=1;
+
+    }
 }
 
 

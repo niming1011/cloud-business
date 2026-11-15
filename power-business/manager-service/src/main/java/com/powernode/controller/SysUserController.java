@@ -14,6 +14,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping("sys/user")
 @Tag(name = "系统管理员接口")
 @RestController
@@ -68,6 +70,13 @@ public class SysUserController {
     public Result modifySysUserInfo(@RequestBody SysUser sysUser) {
         boolean modify=sysUserService.modifySysUserInfo(sysUser);
         return Result.handle(modify);
+    }
+    @DeleteMapping("{ids}")
+    @PreAuthorize("hasAuthority('sys:user:delete')")
+    @Operation(description = "批量/单个删除系统管理员")
+    public Result removeSysUserByIds(@PathVariable List<Long> ids) {
+        boolean removeByIds=sysUserService.removeSysUserByIds(ids);
+        return Result.handle(removeByIds);
     }
 
 }
