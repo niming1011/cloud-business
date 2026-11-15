@@ -11,4 +11,8 @@ import com.baomidou.mybatisplus.spring.service.IService;
 public interface SysUserService extends IService<SysUser> {
 
     boolean saveSysUser(SysUser sysUser);
+
+    SysUser querySysUserInfoById(Long id);
+
+    boolean modifySysUserInfo(SysUser sysUser);
 }

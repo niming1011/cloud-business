@@ -47,11 +47,27 @@ public class SysUserController {
         return Result.success(sysUserPage);
 
     }
-        @PostMapping
-        @PreAuthorize("hasAuthority('sys:user:save')")
-        @Operation(description = "新增管理员")
-        public Result saveSysUser(@RequestBody SysUser sysUser) {
-            boolean save = sysUserService.saveSysUser(sysUser);
-            return Result.handle(save);
-        }
+    @PostMapping
+    @PreAuthorize("hasAuthority('sys:user:save')")
+    @Operation(description = "新增管理员")
+    public Result saveSysUser(@RequestBody SysUser sysUser) {
+        boolean save = sysUserService.saveSysUser(sysUser);
+        return Result.handle(save);
+    }
+    @GetMapping("info/{id}")
+    @PreAuthorize("hasAuthority('sys:user:info')")
+    @Operation(description = "根据表示查询系统管理员信息")
+    public Result loadSysUserInfo(@PathVariable Long id) {
+        SysUser sysUser=sysUserService.querySysUserInfoById(id);
+        return Result.success(sysUser);
+    }
+
+    @PutMapping
+    @PreAuthorize("hasAuthority('sys:user:update')")
+    @Operation(description = "修改管理员西信息")
+    public Result modifySysUserInfo(@RequestBody SysUser sysUser) {
+        boolean modify=sysUserService.modifySysUserInfo(sysUser);
+        return Result.handle(modify);
+    }
+
 }
