@@ -27,4 +27,12 @@ public class CategoryController {
         List<Category> categoryList=categoryService.queryAllCategoryList();
         return Result.success(categoryList);
     }
+
+    @GetMapping("listCategory")
+    @PreAuthorize("hasAuthority('prod:category:page')")
+    @Operation(description = "查询商品一级类目")
+    public Result loadFirstCategoryList() {
+        List<Category> firstCategoryList=categoryService.queryFirstCategoryList();
+        return Result.success(firstCategoryList);
+    }
 }

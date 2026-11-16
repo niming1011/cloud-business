@@ -30,7 +30,17 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
     @Cacheable(key= ProductConstant.ALL_CATEGORY_LIST_KEY)
     public List<Category> queryAllCategoryList() {
         return categoryMapper.selectList(new LambdaQueryWrapper<Category>()
-                .orderByDesc(Category::getCreateTime));
+                .orderByDesc(Category::getSeq));
+    }
+
+    @Override
+    @Cacheable(key=ProductConstant.FIRST_CATEGORY_LIST_KEY)
+    public List<Category> queryFirstCategoryList() {
+        List<Category> categoryList = categoryMapper.selectList(new LambdaQueryWrapper<Category>()
+                .eq(Category::getParentId, 0L)
+                        .eq(Category::getStatus,1)
+                .orderByDesc(Category::getSeq));
+        return categoryList;
     }
 }
 
