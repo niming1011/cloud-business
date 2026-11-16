@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powernode.mapper.SkuMapper">
+
+    <resultMap id="BaseResultMap" type="com.powernode.domain.Sku">
+            <id property="skuId" column="sku_id" />
+            <result property="prodId" column="prod_id" />
+            <result property="properties" column="properties" />
+            <result property="oriPrice" column="ori_price" />
+            <result property="price" column="price" />
+            <result property="stocks" column="stocks" />
+            <result property="actualStocks" column="actual_stocks" />
+            <result property="updateTime" column="update_time" />
+            <result property="createTime" column="create_time" />
+            <result property="modelId" column="model_id" />
+            <result property="pic" column="pic" />
+            <result property="skuName" column="sku_name" />
+            <result property="prodName" column="prod_name" />
+            <result property="version" column="version" />
+            <result property="weight" column="weight" />
+            <result property="volume" column="volume" />
+            <result property="status" column="status" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        sku_id,prod_id,properties,ori_price,price,stocks,
+        actual_stocks,update_time,create_time,model_id,pic,
+        sku_name,prod_name,version,weight,volume,
+        status
+    </sql>
+</mapper>
