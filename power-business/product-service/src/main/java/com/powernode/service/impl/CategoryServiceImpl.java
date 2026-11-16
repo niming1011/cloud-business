@@ -8,9 +8,12 @@ import com.powernode.service.CategoryService;
 import com.powernode.mapper.CategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,6 +44,19 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
                         .eq(Category::getStatus,1)
                 .orderByDesc(Category::getSeq));
         return categoryList;
+    }
+
+    @Override
+    @Caching(
+            evict ={ @CacheEvict(key=ProductConstant.FIRST_CATEGORY_LIST_KEY),
+            @CacheEvict(key=ProductConstant.ALL_CATEGORY_LIST_KEY)}
+
+    )
+    public boolean saveCategory(Category category) {
+        category.setCreateTime(new Date());
+        category.setUpdateTime(new Date());
+        int insert = categoryMapper.insert(category);
+        return insert>=1;
     }
 }
 

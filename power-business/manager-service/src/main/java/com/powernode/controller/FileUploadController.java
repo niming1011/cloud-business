@@ -54,7 +54,7 @@ public class FileUploadController {
                 .region(region)
                 .build();
 
-        URL signedUrl = null;
+        String signedUrlString = null;
         try {
             PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName,objectName,file.getInputStream());
             ossClient.putObject(putObjectRequest);
@@ -62,7 +62,10 @@ public class FileUploadController {
             Date expiration = new Date(new Date().getTime() + 3600 * 1000L*100L);
 
             // 生成预签名URL。
-            signedUrl = ossClient.generatePresignedUrl(bucketName, objectName, expiration);
+//            signedUrl = ossClient.generatePresignedUrl(bucketName, objectName, expiration).toString();
+            // 上传成功后，直接拼接公网 URL，不带任何签名
+            signedUrlString= "https://" + bucketName + ".oss-cn-beijing.aliyuncs.com/" + objectName;
+
 
 
 
@@ -80,6 +83,6 @@ public class FileUploadController {
                 ossClient.shutdown();
             }
         }
-        return signedUrl.toString();
+        return signedUrlString;
     }
 }
