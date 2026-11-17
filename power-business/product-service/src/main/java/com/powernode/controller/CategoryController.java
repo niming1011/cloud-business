@@ -57,4 +57,12 @@ public class CategoryController {
         boolean modified=categoryService.modifyCategory(category);
         return Result.handle(modified);
     }
+
+    @DeleteMapping("{categoryId}")
+    @PreAuthorize("hasAuthority('prod:category:delete')")
+    @Operation(description = "删除类目信息")
+    public Result removeCategory(@PathVariable Long categoryId) {
+        boolean remove =categoryService.removeCategory(categoryId);
+        return Result.handle(remove);
+    }
 }

@@ -19,4 +19,6 @@ public interface CategoryService extends IService<Category> {
     boolean saveCategory(Category category);
 
     boolean modifyCategory(Category category);
+
+    boolean removeCategory(Long categoryId);
 }

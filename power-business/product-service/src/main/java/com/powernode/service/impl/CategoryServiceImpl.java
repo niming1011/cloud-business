@@ -13,6 +13,7 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -65,7 +66,6 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
     @Caching(
             evict ={ @CacheEvict(key=ProductConstant.FIRST_CATEGORY_LIST_KEY),
                     @CacheEvict(key=ProductConstant.ALL_CATEGORY_LIST_KEY)}
-
     )
     public boolean modifyCategory(Category category) {
         Long categoryId = category.getCategoryId();
@@ -85,6 +85,21 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
             category.setParentId(0L);
         }
         return categoryMapper.updateById(category)>=1;
+    }
+
+    @Override
+    @Caching(
+            evict ={ @CacheEvict(key=ProductConstant.FIRST_CATEGORY_LIST_KEY),
+                    @CacheEvict(key=ProductConstant.ALL_CATEGORY_LIST_KEY)}
+    )
+    public boolean removeCategory(Long categoryId) {
+        List<Category> childCategoryList = categoryMapper.selectList(new LambdaQueryWrapper<Category>()
+                .eq(Category::getParentId, categoryId));
+        if(CollectionUtils.isNotEmpty(childCategoryList)){
+            throw new BusinessException("该类目存在二级类目，不允许删除");
+        }
+
+        return categoryMapper.deleteById(categoryId)>=1;
     }
 }
 
