@@ -34,4 +34,12 @@ public class ProdSpecController {
         boolean save=prodPropService.saveProdpropSpec(prodProp);
         return Result.handle(save);
     }
+
+    @PutMapping
+    @PreAuthorize("hasAuthority('prod:spec:update')")
+    @Operation(description = "修改商品规格")
+    public Result modifyProdSpec(@RequestBody ProdProp prodProp) {
+        boolean modified=prodPropService.modifyProdSpec(prodProp);
+        return Result.handle(modified);
+    }
 }

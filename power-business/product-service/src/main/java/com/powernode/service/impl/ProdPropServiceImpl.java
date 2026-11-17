@@ -69,6 +69,20 @@ public class ProdPropServiceImpl extends ServiceImpl<ProdPropMapper, ProdProp>
         }
         return false;
     }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean modifyProdSpec(ProdProp prodProp) {
+        List<ProdPropValue> prodPropValues = prodProp.getProdPropValues();
+        prodPropValueMapper.delete(new LambdaQueryWrapper<ProdPropValue>()
+                .eq(ProdPropValue::getPropId,prodProp.getPropId()));
+        if(CollectionUtils.isNotEmpty(prodPropValues)) {
+            prodPropValues.forEach(prodPropValue -> prodPropValue.setPropId(prodProp.getPropId()));
+            boolean saveBatch = prodPropValueService.saveBatch(prodPropValues);
+            return saveBatch && prodPropMapper.updateById(prodProp)>=1;
+        }
+        return prodPropMapper.updateById(prodProp)>=1;
+    }
 }
 
 
