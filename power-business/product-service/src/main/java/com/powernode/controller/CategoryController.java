@@ -49,4 +49,12 @@ public class CategoryController {
         Category byId = categoryService.getById(categoryId);
         return Result.success(byId);
     }
+
+    @PutMapping
+    @PreAuthorize("hasAuthority('prod:category:update')")
+    @Operation(description = "修改类目信息")
+    public Result modifyCategory(@RequestBody Category category) {
+        boolean modified=categoryService.modifyCategory(category);
+        return Result.handle(modified);
+    }
 }

@@ -17,4 +17,6 @@ public interface CategoryService extends IService<Category> {
     List<Category> queryFirstCategoryList();
 
     boolean saveCategory(Category category);
+
+    boolean modifyCategory(Category category);
 }
