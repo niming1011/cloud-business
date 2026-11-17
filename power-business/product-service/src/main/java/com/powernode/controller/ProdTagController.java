@@ -53,4 +53,12 @@ public class ProdTagController {
         ProdTag byId = prodTagService.getById(tagId);
         return Result.success(byId);
     }
+
+    @PutMapping
+    @PreAuthorize("hasAuthority('prod:prodTag:update')")
+    @Operation(description = "修改分组标签信息")
+    public Result modifyProdTag(@RequestBody ProdTag prodTag) {
+       boolean modified= prodTagService.modifyProdTag(prodTag);
+        return Result.handle(modified);
+    }
 }

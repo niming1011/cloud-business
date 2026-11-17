@@ -26,6 +26,12 @@ public class ProdTagServiceImpl extends ServiceImpl<ProdTagMapper, ProdTag>
         prodTag.setUpdateTime(new Date());
         return prodTagMapper.insert(prodTag)>=1;
     }
+
+    @Override
+    public boolean modifyProdTag(ProdTag prodTag) {
+        prodTag.setUpdateTime(new Date());
+        return prodTagMapper.updateById(prodTag)>=1;
+    }
 }
 
 
