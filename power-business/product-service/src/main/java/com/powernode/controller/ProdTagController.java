@@ -45,4 +45,12 @@ public class ProdTagController {
         boolean save=prodTagService.saveProdTag(prodTag);
         return Result.handle(save);
     }
+
+    @GetMapping("info/{tagId}")
+    @PreAuthorize("hasAuthority('prod:prodTag:info')")
+    @Operation(description = "根据标识查询分组标签详情")
+    public Result loadProdTagInfo(@PathVariable Long tagId) {
+        ProdTag byId = prodTagService.getById(tagId);
+        return Result.success(byId);
+    }
 }
