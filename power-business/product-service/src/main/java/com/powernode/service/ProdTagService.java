@@ -10,4 +10,5 @@ import com.baomidou.mybatisplus.spring.service.IService;
 */
 public interface ProdTagService extends IService<ProdTag> {
 
+    boolean saveProdTag(ProdTag prodTag);
 }

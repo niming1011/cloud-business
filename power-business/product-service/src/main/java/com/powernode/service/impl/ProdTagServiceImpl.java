@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.powernode.domain.ProdTag;
 import com.powernode.service.ProdTagService;
 import com.powernode.mapper.ProdTagMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 /**
 * @author Administrator
@@ -14,7 +17,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProdTagServiceImpl extends ServiceImpl<ProdTagMapper, ProdTag>
     implements ProdTagService{
+    @Autowired
+    private ProdTagMapper prodTagMapper;
 
+    @Override
+    public boolean saveProdTag(ProdTag prodTag) {
+        prodTag.setCreateTime(new Date());
+        prodTag.setUpdateTime(new Date());
+        return prodTagMapper.insert(prodTag)>=1;
+    }
 }
 
 

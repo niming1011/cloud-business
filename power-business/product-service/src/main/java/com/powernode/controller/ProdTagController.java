@@ -12,10 +12,7 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("prod/prodTag")
 @Tag(name="分组标签接口管理")
@@ -28,7 +25,7 @@ public class ProdTagController {
     @PreAuthorize("hasAuthority('prod:prodTag:page')")
     @Operation(description = "多条件分页查询分组标签")
     public Result loadProdTag(@RequestParam("current")Long current,
-                              @RequestParam("sizee")Long size,
+                              @RequestParam("size")Long size,
                               @RequestParam(value = "title",required = false)String title,
                               @RequestParam(value = "status",required = false)Integer status) {
         Page<ProdTag> page = new Page<>(current, size);
@@ -39,5 +36,13 @@ public class ProdTagController {
 
 
         return Result.success(page);
+    }
+
+    @PostMapping
+    @PreAuthorize("hasAuthority('prod:prodTag:save')")
+    @Operation(description = "新增分组标签")
+    public Result saveProdTag(@RequestBody ProdTag prodTag) {
+        boolean save=prodTagService.saveProdTag(prodTag);
+        return Result.handle(save);
     }
 }
