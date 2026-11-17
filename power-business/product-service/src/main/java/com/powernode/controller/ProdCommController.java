@@ -12,10 +12,7 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("prod/prodComm")
 @Tag(name="商品评论接口管理")
@@ -37,5 +34,13 @@ public class ProdCommController {
                 .like(StringUtils.hasText(prodName), ProdComm::getProdName, prodName)
                 .orderByDesc(ProdComm::getCreateTime));
         return Result.success(page);
+    }
+
+    @GetMapping("{id}")
+    @PreAuthorize("hasAuthority('prod:prodComm:info')")
+    @Operation(description = "根据标识查询商品评论详情")
+    public Result loadProdCommInfo(@PathVariable Long id) {
+        ProdComm byId = prodCommService.getById(id);
+        return Result.success(byId);
     }
 }
