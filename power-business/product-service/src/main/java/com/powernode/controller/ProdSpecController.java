@@ -31,7 +31,7 @@ public class ProdSpecController {
     @PreAuthorize("hasAuthority('prod:spec:save')")
     @Operation(description = "新增商品规格")
     public Result saveProdSpec(@RequestBody ProdProp prodProp) {
-        boolean save=prodPropService.saveProdpropSpec(prodProp);
+        boolean save=prodPropService.saveProdPropSpec(prodProp);
         return Result.handle(save);
     }
 
@@ -41,5 +41,13 @@ public class ProdSpecController {
     public Result modifyProdSpec(@RequestBody ProdProp prodProp) {
         boolean modified=prodPropService.modifyProdSpec(prodProp);
         return Result.handle(modified);
+    }
+
+    @DeleteMapping("{propId}")
+    @PreAuthorize("hasAuthority('prod:spec:delete')")
+    @Operation(description = "删除商品规格信息")
+    public Result removeProdSpec(@PathVariable Long propId) {
+        boolean remove=prodPropService.removeProdSpec(propId);
+        return Result.handle(remove);
     }
 }

@@ -13,7 +13,9 @@ public interface ProdPropService extends IService<ProdProp> {
 
     Page<ProdProp> queryProdSpecPage(Long current, Long size, String propName);
 
-    boolean saveProdpropSpec(ProdProp prodProp);
+    boolean saveProdPropSpec(ProdProp prodProp);
 
     boolean modifyProdSpec(ProdProp prodProp);
+
+    boolean removeProdSpec(Long propId);
 }

@@ -55,7 +55,7 @@ public class ProdPropServiceImpl extends ServiceImpl<ProdPropMapper, ProdProp>
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean saveProdpropSpec(ProdProp prodProp) {
+    public boolean saveProdPropSpec(ProdProp prodProp) {
         prodProp.setShopId(1L);
         prodProp.setRule(2);
         int insert = prodPropMapper.insert(prodProp);
@@ -82,6 +82,14 @@ public class ProdPropServiceImpl extends ServiceImpl<ProdPropMapper, ProdProp>
             return saveBatch && prodPropMapper.updateById(prodProp)>=1;
         }
         return prodPropMapper.updateById(prodProp)>=1;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean removeProdSpec(Long propId) {
+        prodPropValueMapper.delete(new LambdaQueryWrapper<ProdPropValue>()
+                .eq(ProdPropValue::getPropId, propId));
+        return prodPropMapper.deleteById(propId)>=1;
     }
 }
 
