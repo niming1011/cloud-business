@@ -1,5 +1,6 @@
 package com.powernode.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.powernode.domain.ProdProp;
 import com.baomidou.mybatisplus.spring.service.IService;
 
@@ -10,4 +11,5 @@ import com.baomidou.mybatisplus.spring.service.IService;
 */
 public interface ProdPropService extends IService<ProdProp> {
 
+    Page<ProdProp> queryProdSpecPage(Long current, Long size, String propName);
 }

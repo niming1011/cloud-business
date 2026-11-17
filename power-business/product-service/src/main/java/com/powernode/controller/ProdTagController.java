@@ -61,4 +61,12 @@ public class ProdTagController {
        boolean modified= prodTagService.modifyProdTag(prodTag);
         return Result.handle(modified);
     }
+
+    @DeleteMapping("{tagId}")
+    @PreAuthorize("hasAuthority('prod:prodTag:delete')")
+    @Operation(description = "根据标识删除商品分组标签")
+    public Result removeProdTag(@PathVariable Long tagId) {
+        boolean removed = prodTagService.removeById(tagId);
+        return Result.handle(removed);
+    }
 }

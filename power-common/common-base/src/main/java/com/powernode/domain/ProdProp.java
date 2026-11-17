@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.util.List;
+
 import lombok.Data;
 
 /**
@@ -34,6 +36,9 @@ public class ProdProp implements Serializable {
      * 店铺id
      */
     private Long shopId;
+
+    @TableField(exist = false)
+    private List<ProdPropValue> prodPropValues;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
