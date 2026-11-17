@@ -11,7 +11,9 @@ import com.powernode.service.ProdPropService;
 import com.powernode.mapper.ProdPropMapper;
 import com.powernode.service.ProdPropValueService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -29,6 +31,8 @@ public class ProdPropServiceImpl extends ServiceImpl<ProdPropMapper, ProdProp>
     private ProdPropMapper prodPropMapper;
     @Autowired
     private ProdPropValueMapper prodPropValueMapper;
+    @Autowired
+    private ProdPropValueService prodPropValueService;
 
     @Override
     public Page<ProdProp> queryProdSpecPage(Long current, Long size, String propName) {
@@ -47,6 +51,23 @@ public class ProdPropServiceImpl extends ServiceImpl<ProdPropMapper, ProdProp>
             prodProp.setProdPropValues(list);
         });
         return page;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean saveProdpropSpec(ProdProp prodProp) {
+        prodProp.setShopId(1L);
+        prodProp.setRule(2);
+        int insert = prodPropMapper.insert(prodProp);
+        if(insert>=1){
+            ProdProp saveProdProp = prodPropMapper.selectOne(new LambdaQueryWrapper<ProdProp>().eq(ProdProp::getPropName, prodProp.getPropName()));
+            List<ProdPropValue> prodPropValues = prodProp.getProdPropValues();
+            if(CollectionUtils.isNotEmpty(prodPropValues)){
+                prodPropValues.forEach(prodPropValue -> prodPropValue.setPropId(saveProdProp.getPropId()));
+            }
+            return prodPropValueService.saveBatch(prodPropValues);
+        }
+        return false;
     }
 }
 
