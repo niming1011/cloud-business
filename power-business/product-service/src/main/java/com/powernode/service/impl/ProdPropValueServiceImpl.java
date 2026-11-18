@@ -1,10 +1,15 @@
 package com.powernode.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
+import com.powernode.domain.ProdProp;
 import com.powernode.domain.ProdPropValue;
 import com.powernode.service.ProdPropValueService;
 import com.powernode.mapper.ProdPropValueMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
 * @author Administrator

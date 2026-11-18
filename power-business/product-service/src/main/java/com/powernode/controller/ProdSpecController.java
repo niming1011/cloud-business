@@ -1,9 +1,12 @@
 package com.powernode.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.powernode.domain.ProdProp;
+import com.powernode.domain.ProdPropValue;
 import com.powernode.result.Result;
 import com.powernode.service.ProdPropService;
+import com.powernode.service.ProdPropValueService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,8 @@ import java.util.List;
 public class ProdSpecController {
     @Autowired
     private ProdPropService prodPropService;
+    @Autowired
+    private ProdPropValueService prodPropValueService;
 
     @GetMapping("page")
     @PreAuthorize("hasAuthority('prod:spec:page')")
@@ -59,5 +64,14 @@ public class ProdSpecController {
     public Result loadProdSpecList() {
         List<ProdProp> prodPropList=prodPropService.queryProdSpecList();
         return Result.success(prodPropList);
+    }
+
+    @GetMapping("listSpecValue/{propId}")
+    @PreAuthorize("hasAuthority('prod:spec:page')")
+    @Operation(description = "根据商品属性集合查询商品属性值集合")
+    public Result loadSpecValueBySpecId(@PathVariable Long propId) {
+        List<ProdPropValue> prodPropValueList=prodPropValueService.list(new LambdaQueryWrapper<ProdPropValue>()
+                .eq(ProdPropValue::getPropId,propId));
+        return Result.success(prodPropValueList);
     }
 }
