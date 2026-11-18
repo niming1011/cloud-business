@@ -4,4 +4,5 @@ public interface ProductConstant {
     String ALL_CATEGORY_LIST_KEY="'allCategory'";
     String FIRST_CATEGORY_LIST_KEY = "'firstCategory'";
     String PROD_TAG_NORMAL_KEY = "'prodTagNormal'";
+    String PROD_PROP_KEY = "'prodProp'";
 }

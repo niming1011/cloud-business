@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
+import com.powernode.constant.ProductConstant;
 import com.powernode.domain.ProdProp;
 import com.powernode.domain.ProdPropValue;
 import com.powernode.mapper.ProdPropValueMapper;
@@ -11,6 +12,9 @@ import com.powernode.service.ProdPropService;
 import com.powernode.mapper.ProdPropMapper;
 import com.powernode.service.ProdPropValueService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +29,7 @@ import java.util.stream.Collectors;
 * @createDate 2026-11-16 14:02:23
 */
 @Service
+@CacheConfig(cacheNames = "com.powernode.service.impl.ProdPropServiceImpl")
 public class ProdPropServiceImpl extends ServiceImpl<ProdPropMapper, ProdProp>
     implements ProdPropService{
     @Autowired
@@ -55,6 +60,7 @@ public class ProdPropServiceImpl extends ServiceImpl<ProdPropMapper, ProdProp>
 
     @Override
     @Transactional(rollbackFor = Exception.class)
+    @CacheEvict(key= ProductConstant.PROD_PROP_KEY)
     public boolean saveProdPropSpec(ProdProp prodProp) {
         prodProp.setShopId(1L);
         prodProp.setRule(2);
@@ -72,6 +78,7 @@ public class ProdPropServiceImpl extends ServiceImpl<ProdPropMapper, ProdProp>
 
     @Override
     @Transactional(rollbackFor = Exception.class)
+    @CacheEvict(key= ProductConstant.PROD_PROP_KEY)
     public boolean modifyProdSpec(ProdProp prodProp) {
         List<ProdPropValue> prodPropValues = prodProp.getProdPropValues();
         prodPropValueMapper.delete(new LambdaQueryWrapper<ProdPropValue>()
@@ -86,10 +93,18 @@ public class ProdPropServiceImpl extends ServiceImpl<ProdPropMapper, ProdProp>
 
     @Override
     @Transactional(rollbackFor = Exception.class)
+    @CacheEvict(key= ProductConstant.PROD_PROP_KEY)
     public boolean removeProdSpec(Long propId) {
         prodPropValueMapper.delete(new LambdaQueryWrapper<ProdPropValue>()
                 .eq(ProdPropValue::getPropId, propId));
         return prodPropMapper.deleteById(propId)>=1;
+    }
+
+    @Override
+    @Cacheable(key= ProductConstant.PROD_PROP_KEY)
+    public List<ProdProp> queryProdSpecList() {
+        List<ProdProp> prodPropList = prodPropMapper.selectList(new LambdaQueryWrapper<ProdProp>());
+        return prodPropList;
     }
 }
 

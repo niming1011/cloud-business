@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.powernode.domain.ProdProp;
 import com.baomidou.mybatisplus.spring.service.IService;
 
+import java.util.List;
+
 /**
 * @author Administrator
 * @description 针对表【prod_prop】的数据库操作Service
@@ -18,4 +20,6 @@ public interface ProdPropService extends IService<ProdProp> {
     boolean modifyProdSpec(ProdProp prodProp);
 
     boolean removeProdSpec(Long propId);
+
+    List<ProdProp> queryProdSpecList();
 }
