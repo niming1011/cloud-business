@@ -7,7 +7,11 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 商品
@@ -113,6 +117,16 @@ public class Prod implements Serializable {
     private Integer version;
 
     @TableField(exist = false)
+    private DeliveryModeVo deliverModeVO;
+
+    @TableField(exist = false)
+    private List<Sku> skuList;
+
+    @TableField(exist = false)
+    private List<Long> tagList;
+
+
+    @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -202,5 +216,12 @@ public class Prod implements Serializable {
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
+    }
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public  class DeliveryModeVo {
+        private Boolean hasShopDelivery;
+        private Boolean hasUserPickUp;
     }
 }

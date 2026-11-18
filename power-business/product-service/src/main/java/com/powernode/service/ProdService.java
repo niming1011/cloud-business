@@ -10,4 +10,5 @@ import com.baomidou.mybatisplus.spring.service.IService;
 */
 public interface ProdService extends IService<Prod> {
 
+    boolean saveProd(Prod prod);
 }

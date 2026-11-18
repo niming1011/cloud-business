@@ -106,6 +106,7 @@ public class ProdPropServiceImpl extends ServiceImpl<ProdPropMapper, ProdProp>
         List<ProdProp> prodPropList = prodPropMapper.selectList(new LambdaQueryWrapper<ProdProp>());
         return prodPropList;
     }
+
 }
 
 

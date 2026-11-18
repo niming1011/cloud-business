@@ -11,10 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("prod/prod")
 @Tag(name = "商品接口管理")
@@ -36,5 +33,13 @@ public class ProdController {
                 .like(StringUtils.hasText(prodName), Prod::getProdName, prodName)
                 .orderByDesc(Prod::getCreateTime));
         return Result.success(page);
+    }
+
+    @PostMapping
+    @PreAuthorize("hasAuthority('prod:prod:save')")
+    @Operation(description = "新增商品")
+    public Result saveProd(@RequestBody Prod prod) {
+        boolean save=prodService.saveProd(prod);
+        return Result.handle(save);
     }
 }
