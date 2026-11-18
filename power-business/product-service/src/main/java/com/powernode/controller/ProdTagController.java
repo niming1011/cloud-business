@@ -14,6 +14,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping("prod/prodTag")
 @Tag(name="分组标签接口管理")
 @RestController
@@ -66,7 +68,15 @@ public class ProdTagController {
     @PreAuthorize("hasAuthority('prod:prodTag:delete')")
     @Operation(description = "根据标识删除商品分组标签")
     public Result removeProdTag(@PathVariable Long tagId) {
-        boolean removed = prodTagService.removeById(tagId);
+        boolean removed = prodTagService.removeProdTag(tagId);
         return Result.handle(removed);
+    }
+
+    @GetMapping("listTagList")
+    @PreAuthorize("hasAuthority('prod:prodTag:page')")
+    @Operation(description = "查询状态正常的商品分组标签集合")
+    public Result loadProdTagList() {
+        List<ProdTag> prodTagList=prodTagService.queryProdTagList();
+        return Result.success(prodTagList);
     }
 }

@@ -3,6 +3,8 @@ package com.powernode.service;
 import com.powernode.domain.ProdTag;
 import com.baomidou.mybatisplus.spring.service.IService;
 
+import java.util.List;
+
 /**
 * @author Administrator
 * @description 针对表【prod_tag(商品分组表)】的数据库操作Service
@@ -13,4 +15,8 @@ public interface ProdTagService extends IService<ProdTag> {
     boolean saveProdTag(ProdTag prodTag);
 
     boolean modifyProdTag(ProdTag prodTag);
+
+    List<ProdTag> queryProdTagList();
+
+    boolean removeProdTag(Long tagId);
 }
