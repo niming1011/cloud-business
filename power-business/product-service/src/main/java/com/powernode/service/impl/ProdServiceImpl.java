@@ -130,6 +130,15 @@ public class ProdServiceImpl extends ServiceImpl<ProdMapper, Prod>
         int i = prodMapper.updateById(prod);
         return i>=1;
     }
+
+    @Override
+    public boolean removeProd(Long prodId) {
+        prodTagReferenceMapper.delete(new LambdaQueryWrapper<ProdTagReference>()
+                .eq(ProdTagReference::getProdId,prodId));
+        skuMapper.delete(new LambdaQueryWrapper<Sku>()
+                .eq(Sku::getProdId,prodId));
+        return prodMapper.deleteById(prodId)>=1;
+    }
 }
 
 

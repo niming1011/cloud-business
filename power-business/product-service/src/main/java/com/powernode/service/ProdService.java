@@ -15,4 +15,6 @@ public interface ProdService extends IService<Prod> {
     Prod queryProdInfo(Long prodId);
 
     boolean modifyProdInfo(Prod prod);
+
+    boolean removeProd(Long prodId);
 }

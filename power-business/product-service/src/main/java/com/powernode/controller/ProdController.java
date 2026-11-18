@@ -58,4 +58,12 @@ public class ProdController {
         boolean modified=prodService.modifyProdInfo(prod);
         return Result.handle(modified);
     }
+
+    @DeleteMapping("{prodId}")
+    @PreAuthorize("hasAuthority('prod:prod:delete')")
+    @Operation(description = "删除商品信息")
+    public Result removeProd(@PathVariable Long prodId) {
+        boolean remove=prodService.removeProd(prodId);
+        return Result.handle(remove);
+    }
 }
