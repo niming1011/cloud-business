@@ -43,4 +43,12 @@ public class ProdCommController {
         ProdComm byId = prodCommService.getById(id);
         return Result.success(byId);
     }
+
+    @PutMapping
+    @PreAuthorize("hasAuthority('prod:prodComm:update')")
+    @Operation(description = "回复和审核商品评论")
+    public Result replyAndExamineProdComm(@RequestBody ProdComm prodComm) {
+        boolean flag=prodCommService.replyAndExamineProdComm(prodComm);
+        return Result.handle(flag);
+    }
 }

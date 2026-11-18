@@ -10,4 +10,5 @@ import com.baomidou.mybatisplus.spring.service.IService;
 */
 public interface ProdCommService extends IService<ProdComm> {
 
+    boolean replyAndExamineProdComm(ProdComm prodComm);
 }
