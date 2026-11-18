@@ -13,6 +13,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping("prod/prod")
 @Tag(name = "商品接口管理")
 @RestController
@@ -59,11 +61,12 @@ public class ProdController {
         return Result.handle(modified);
     }
 
-    @DeleteMapping("{prodId}")
+    @DeleteMapping("{prodIds}")
     @PreAuthorize("hasAuthority('prod:prod:delete')")
     @Operation(description = "删除商品信息")
-    public Result removeProd(@PathVariable Long prodId) {
-        boolean remove=prodService.removeProd(prodId);
+    public Result removeProd(@PathVariable List<Long> prodIds) {
+        boolean remove=prodService.removeProd(prodIds);
         return Result.handle(remove);
     }
+
 }

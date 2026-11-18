@@ -7,12 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="manager-service" />
+        <module name="auth-server" />
+        <module name="store-service" />
         <module name="gateway-server" />
         <module name="product-service" />
-        <module name="manager-service" />
         <module name="common-cor" />
         <module name="common-base" />
-        <module name="auth-server" />
       </profile>
     </annotationProcessing>
   </component>
@@ -24,6 +25,7 @@
       <module name="gateway-server" options="-parameters" />
       <module name="manager-service" options="-parameters" />
       <module name="product-service" options="-parameters" />
+      <module name="store-service" options="-parameters" />
     </option>
   </component>
 </project>

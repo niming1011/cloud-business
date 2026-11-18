@@ -16,6 +16,7 @@ import com.powernode.service.ProdTagReferenceService;
 import com.powernode.service.SkuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -132,12 +133,13 @@ public class ProdServiceImpl extends ServiceImpl<ProdMapper, Prod>
     }
 
     @Override
-    public boolean removeProd(Long prodId) {
+    @Transactional(rollbackFor = Exception.class)
+    public boolean removeProd(List<Long> prodIds) {
         prodTagReferenceMapper.delete(new LambdaQueryWrapper<ProdTagReference>()
-                .eq(ProdTagReference::getProdId,prodId));
+                .in(ProdTagReference::getProdId,prodIds));
         skuMapper.delete(new LambdaQueryWrapper<Sku>()
-                .eq(Sku::getProdId,prodId));
-        return prodMapper.deleteById(prodId)>=1;
+                .in(Sku::getProdId,prodIds));
+        return this.removeBatchByIds(prodIds);
     }
 }
 
