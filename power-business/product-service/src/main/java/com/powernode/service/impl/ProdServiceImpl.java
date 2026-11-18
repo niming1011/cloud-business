@@ -1,12 +1,15 @@
 package com.powernode.service.impl;
 
 import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.powernode.domain.Prod;
 import com.powernode.domain.ProdTag;
 import com.powernode.domain.ProdTagReference;
 import com.powernode.domain.Sku;
+import com.powernode.mapper.ProdTagReferenceMapper;
+import com.powernode.mapper.SkuMapper;
 import com.powernode.service.ProdService;
 import com.powernode.mapper.ProdMapper;
 import com.powernode.service.ProdTagReferenceService;
@@ -32,6 +35,10 @@ public class ProdServiceImpl extends ServiceImpl<ProdMapper, Prod>
     private ProdTagReferenceService prodTagReferenceService;
     @Autowired
     private SkuService skuService;
+    @Autowired
+    private ProdTagReferenceMapper prodTagReferenceMapper;
+    @Autowired
+    private SkuMapper skuMapper;
 
     @Override
     public boolean saveProd(Prod prod) {
@@ -41,7 +48,8 @@ public class ProdServiceImpl extends ServiceImpl<ProdMapper, Prod>
         prod.setSoldNum(0);
         prod.setPutawayTime(new Date());
         prod.setVersion(0);
-        prod.setDeliveryMode(JSONUtil.toJsonStr(prod.getDeliverModeVO()));
+       prod.setDeliveryMode(JSONUtil.toJsonStr(prod.getDeliveryModeVo()));
+//        prod.setDeliveryMode(prod.getDeliverModeVO());
         int insert = prodMapper.insert(prod);
         if(insert>=1){
             Long prodId = prod.getProdId();
@@ -74,6 +82,53 @@ public class ProdServiceImpl extends ServiceImpl<ProdMapper, Prod>
         return true;
         }
         return false;
+    }
+
+    @Override
+    public Prod queryProdInfo(Long prodId) {
+        Prod prod = prodMapper.selectById(prodId);
+        List<ProdTagReference> prodTagReferenceList = prodTagReferenceMapper.selectList(new LambdaQueryWrapper<ProdTagReference>()
+                .eq(ProdTagReference::getProdId, prod));
+        if(CollectionUtils.isNotEmpty(prodTagReferenceList)){
+            List<Long> list = prodTagReferenceList.stream().map(ProdTagReference::getTagId).toList();
+            prod.setTagList(list);
+        }
+        List<Sku> skuList = skuMapper.selectList(new LambdaQueryWrapper<Sku>()
+                .eq(Sku::getProdId, prodId));
+        prod.setSkuList(skuList);
+
+        return prod;
+    }
+
+    @Override
+    public boolean modifyProdInfo(Prod prod) {
+        Long prodId = prod.getProdId();
+        prodTagReferenceMapper.delete(new LambdaQueryWrapper<ProdTagReference>()
+                .eq(ProdTagReference::getProdId,prodId));
+        List<Long> tagList = prod.getTagList();
+        if(CollectionUtils.isNotEmpty(tagList)){
+            List<ProdTagReference> prodTagReferenceList=new ArrayList<>();
+            tagList.forEach(tag->{
+                ProdTagReference prodTagReference = new ProdTagReference();
+                prodTagReference.setProdId(prodId);
+                prodTagReference.setCreateTime(new Date());
+                prodTagReference.setShopId(1L);
+                prodTagReference.setStatus(1);
+                prodTagReference.setTagId(tag);
+                prodTagReference.setStatus(1);
+                prodTagReferenceList.add(prodTagReference);
+            });
+            prodTagReferenceService.saveBatch(prodTagReferenceList);
+        }
+        List<Sku> skuList = prod.getSkuList();
+        skuList.forEach(sku -> {
+            sku.setUpdateTime(new Date());
+            sku.setActualStocks(sku.getStocks());
+        });
+        skuService.updateBatchById(skuList);
+        prod.setUpdateTime(new Date());
+        int i = prodMapper.updateById(prod);
+        return i>=1;
     }
 }
 

@@ -117,7 +117,7 @@ public class Prod implements Serializable {
     private Integer version;
 
     @TableField(exist = false)
-    private DeliveryModeVo deliverModeVO;
+    private DeliveryModeVo deliveryModeVo;
 
     @TableField(exist = false)
     private List<Sku> skuList;
@@ -220,7 +220,7 @@ public class Prod implements Serializable {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    public  class DeliveryModeVo {
+    public static class DeliveryModeVo {
         private Boolean hasShopDelivery;
         private Boolean hasUserPickUp;
     }

@@ -42,4 +42,20 @@ public class ProdController {
         boolean save=prodService.saveProd(prod);
         return Result.handle(save);
     }
+
+    @GetMapping("info/{prodId}")
+    @PreAuthorize("hasAuthority('prod:prod:info')")
+    @Operation(description = "根据商品表示查询商品详细信息")
+    public Result queryProdInfo(@PathVariable Long prodId) {
+        Prod prod=prodService.queryProdInfo(prodId);
+        return Result.success(prod);
+    }
+
+    @PutMapping
+    @PreAuthorize("hasAuthority('prod:prod:update')")
+    @Operation(description = "修改商品信息")
+    public Result modifyProdInfo(@RequestBody Prod prod) {
+        boolean modified=prodService.modifyProdInfo(prod);
+        return Result.handle(modified);
+    }
 }
