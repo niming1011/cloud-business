@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping("prod/spec")
 @Tag(name="商品规格接口管理")
 @RestController
@@ -49,5 +51,13 @@ public class ProdSpecController {
     public Result removeProdSpec(@PathVariable Long propId) {
         boolean remove=prodPropService.removeProdSpec(propId);
         return Result.handle(remove);
+    }
+
+    @GetMapping("list")
+    @PreAuthorize("hasAuthority('prod:spec:page')")
+    @Operation(description = "查询商品属性集合")
+    public Result loadProdSpecList() {
+        List<ProdProp> prodPropList=prodPropService.queryProdSpecList();
+        return Result.success(prodPropList);
     }
 }
