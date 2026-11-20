@@ -13,6 +13,7 @@
         <module name="gateway-server" />
         <module name="product-service" />
         <module name="member-service" />
+        <module name="order-service" />
         <module name="common-cor" />
         <module name="common-base" />
       </profile>
@@ -26,6 +27,7 @@
       <module name="gateway-server" options="-parameters" />
       <module name="manager-service" options="-parameters" />
       <module name="member-service" options="-parameters" />
+      <module name="order-service" options="-parameters" />
       <module name="product-service" options="-parameters" />
       <module name="store-service" options="-parameters" />
     </option>
