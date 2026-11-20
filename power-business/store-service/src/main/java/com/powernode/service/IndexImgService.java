@@ -11,4 +11,6 @@ import com.baomidou.mybatisplus.spring.service.IService;
 public interface IndexImgService extends IService<IndexImg> {
 
     boolean saveIndexImg(IndexImg indexImg);
+
+    IndexImg queryIndexImgInfo(Long imgId);
 }

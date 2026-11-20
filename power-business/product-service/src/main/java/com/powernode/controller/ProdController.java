@@ -68,5 +68,11 @@ public class ProdController {
         boolean remove=prodService.removeProd(prodIds);
         return Result.handle(remove);
     }
+    @GetMapping("getProdInfoById")
+    Result getProdListByIds(@RequestParam("prodIdList") List<Long> prodIdList){
+        List<Prod> list = prodService.list(new LambdaQueryWrapper<Prod>()
+                .in(Prod::getProdId, prodIdList));
+        return Result.success(list);
+    }
 
 }

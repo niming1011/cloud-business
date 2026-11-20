@@ -40,4 +40,12 @@ public class IndexImgController {
         boolean save=indexImgService.saveIndexImg(indexImg);
         return Result.handle(save);
     }
+
+    @GetMapping("info/{imgId}")
+    @PreAuthorize("hasAuthority('admin:indexImg:info')")
+    @Operation(description = "根据标识查询轮播图信息")
+    public Result loadIndexImgInfo(@PathVariable Long imgId) {
+        IndexImg indexImg=indexImgService.queryIndexImgInfo(imgId);
+        return Result.success(indexImg);
+    }
 }

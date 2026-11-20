@@ -72,6 +72,11 @@ public class IndexImg implements Serializable {
     private Integer type;
 
     @TableField(exist = false)
+    private String pic;
+    @TableField(exist = false)
+    private String prodName;
+
+    @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
     @Override
