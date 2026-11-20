@@ -61,4 +61,12 @@ public class NoticeController {
         boolean modified=noticeService.modifyNotice(notice);
         return Result.handle(modified);
     }
+
+    @DeleteMapping("{noticeId}")
+    @PreAuthorize("hasAuthority('shop:notice:delete')")
+    @Operation(description = "根据公告标识删除公告")
+    public Result removeNotice(@PathVariable Long noticeId) {
+        boolean saveBatch = noticeService.removeById(noticeId);
+        return Result.handle(saveBatch);
+    }
 }
