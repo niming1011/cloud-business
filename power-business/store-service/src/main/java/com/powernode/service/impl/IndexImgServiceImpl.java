@@ -2,6 +2,8 @@ package com.powernode.service.impl;
 
 import cn.hutool.core.convert.Convert;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
+import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
+import com.baomidou.mybatisplus.extension.conditions.update.LambdaUpdateChainWrapper;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,6 +15,7 @@ import com.powernode.feign.StoreProdFeign;
 import com.powernode.result.Result;
 import com.powernode.service.IndexImgService;
 import com.powernode.mapper.IndexImgMapper;
+import net.sf.jsqlparser.statement.create.table.Index;
 import org.aspectj.util.PartialOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,6 +69,22 @@ public class IndexImgServiceImpl extends ServiceImpl<IndexImgMapper, IndexImg>
             }
         }
         return indexImg;
+    }
+
+    @Override
+    public boolean modifyIndexImg(IndexImg indexImg) {
+        int i = indexImgMapper.updateById(indexImg);
+        if(i>=1){
+            if(indexImg.getType()==-1){
+                boolean update = new LambdaUpdateChainWrapper<IndexImg>(indexImgMapper)
+                        .eq(IndexImg::getImgId, indexImg.getImgId())
+                        .set(IndexImg::getProdId, null)
+                        .update();
+                return update;
+            }
+            return true;
+        }
+        return false;
     }
 }
 

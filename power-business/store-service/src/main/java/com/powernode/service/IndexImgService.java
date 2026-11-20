@@ -13,4 +13,6 @@ public interface IndexImgService extends IService<IndexImg> {
     boolean saveIndexImg(IndexImg indexImg);
 
     IndexImg queryIndexImgInfo(Long imgId);
+
+    boolean modifyIndexImg(IndexImg indexImg);
 }

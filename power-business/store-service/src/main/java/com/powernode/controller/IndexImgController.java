@@ -48,4 +48,12 @@ public class IndexImgController {
         IndexImg indexImg=indexImgService.queryIndexImgInfo(imgId);
         return Result.success(indexImg);
     }
+
+    @PutMapping
+    @PreAuthorize("hasAuthority('admin:indexImg:update')")
+    @Operation(description = "修改轮播图内容")
+    public Result modifyIndexImgInfo(@RequestBody IndexImg indexImg) {
+        boolean modified = indexImgService.modifyIndexImg(indexImg);
+        return Result.handle(modified);
+    }
 }
