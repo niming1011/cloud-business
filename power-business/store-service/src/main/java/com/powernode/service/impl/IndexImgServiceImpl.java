@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.powernode.domain.IndexImg;
 import com.powernode.service.IndexImgService;
 import com.powernode.mapper.IndexImgMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 /**
 * @author Administrator
@@ -14,7 +17,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class IndexImgServiceImpl extends ServiceImpl<IndexImgMapper, IndexImg>
     implements IndexImgService{
+    @Autowired
+    private IndexImgMapper indexImgMapper;
 
+    @Override
+    public boolean saveIndexImg(IndexImg indexImg) {
+        indexImg.setShopId(1L);
+        indexImg.setCreateTime(new Date());
+        Integer type = indexImg.getType();
+        if(-1==type){
+            indexImg.setProdId(-1L);
+        }
+        int insert = indexImgMapper.insert(indexImg);
+        return insert>=1;
+    }
 }
 
 
