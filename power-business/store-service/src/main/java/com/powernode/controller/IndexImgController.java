@@ -13,6 +13,8 @@ import org.springframework.data.redis.core.index.IndexDefinition;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping("admin/indexImg")
 @Tag(name = "轮播图接口管理")
 @RestController
@@ -55,5 +57,13 @@ public class IndexImgController {
     public Result modifyIndexImgInfo(@RequestBody IndexImg indexImg) {
         boolean modified = indexImgService.modifyIndexImg(indexImg);
         return Result.handle(modified);
+    }
+
+    @DeleteMapping
+    @PreAuthorize("hasAuthority('admin:indexImg:delete')")
+    @Operation(description = "批量删除轮播图")
+    public Result removeIndexImg(@RequestBody List<Long> imgIds) {
+        boolean removed = indexImgService.removeBatchByIds(imgIds);
+        return Result.handle(removed);
     }
 }
