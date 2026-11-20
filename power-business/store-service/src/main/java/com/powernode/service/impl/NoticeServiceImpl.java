@@ -28,6 +28,12 @@ public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice>
 
         return noticeMapper.insert(notice)>=1;
     }
+
+    @Override
+    public boolean modifyNotice(Notice notice) {
+        notice.setUpdateTime(new Date());
+        return noticeMapper.updateById(notice)>=1;
+    }
 }
 
 

@@ -11,4 +11,6 @@ import com.baomidou.mybatisplus.spring.service.IService;
 public interface NoticeService extends IService<Notice> {
 
     boolean saveNotice(Notice notice);
+
+    boolean modifyNotice(Notice notice);
 }

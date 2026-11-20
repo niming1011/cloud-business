@@ -53,4 +53,12 @@ public class NoticeController {
         Notice byId = noticeService.getById(noticeId);
         return Result.success(byId);
     }
+
+    @PutMapping
+    @PreAuthorize("hasAuthority('shop:notice:update')")
+    @Operation(description = "修改公告信息")
+    public Result modifyNotice(@RequestBody Notice notice) {
+        boolean modified=noticeService.modifyNotice(notice);
+        return Result.handle(modified);
+    }
 }
