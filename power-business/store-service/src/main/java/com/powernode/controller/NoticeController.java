@@ -12,10 +12,7 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("shop/notice")
 @Tag(name="公告业务管理模块")
@@ -39,5 +36,21 @@ public class NoticeController {
                 .like(StringUtils.hasText(title), Notice::getTitle, title)
                 .orderByDesc(Notice::getCreateTime));
         return Result.success(page);
+    }
+
+    @PostMapping
+    @PreAuthorize("hasAuthority('shop:notice:page')")
+    @Operation(description = "新增公告")
+    public Result saveNotice(@RequestBody Notice notice) {
+        boolean save=noticeService.saveNotice(notice);
+        return Result.handle(save);
+    }
+
+    @GetMapping("info/{noticeId}")
+    @PreAuthorize("hasAuthority('shop:notice:info')")
+    @Operation(description = "根据标识查询公告对象")
+    public Result loadNoticeInfo(@PathVariable Long noticeId) {
+        Notice byId = noticeService.getById(noticeId);
+        return Result.success(byId);
     }
 }

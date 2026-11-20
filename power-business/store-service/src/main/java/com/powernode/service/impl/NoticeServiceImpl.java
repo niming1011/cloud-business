@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.powernode.domain.Notice;
 import com.powernode.service.NoticeService;
 import com.powernode.mapper.NoticeMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 /**
 * @author Administrator
@@ -14,7 +17,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice>
     implements NoticeService{
+    @Autowired
+    private NoticeMapper noticeMapper;
 
+    @Override
+    public boolean saveNotice(Notice notice) {
+        notice.setCreateTime(new Date());
+        notice.setUpdateTime(new Date());
+        notice.setShopId(1L);
+
+        return noticeMapper.insert(notice)>=1;
+    }
 }
 
 
