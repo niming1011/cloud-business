@@ -1,6 +1,6 @@
 package com.powernode.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.powernode.domain.MemberAddr;
 import com.powernode.service.MemberAddrService;
 import com.powernode.mapper.MemberAddrMapper;

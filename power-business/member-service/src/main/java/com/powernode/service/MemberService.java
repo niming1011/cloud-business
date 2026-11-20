@@ -1,7 +1,7 @@
 package com.powernode.service;
 
 import com.powernode.domain.Member;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 
 /**
 * @author Administrator
