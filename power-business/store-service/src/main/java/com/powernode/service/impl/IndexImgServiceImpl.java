@@ -1,5 +1,6 @@
 package com.powernode.service.impl;
 
+import cn.hutool.core.convert.Convert;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -55,11 +56,8 @@ public class IndexImgServiceImpl extends ServiceImpl<IndexImgMapper, IndexImg>
             if(BusinessEnum.OPERATION_FAIL.getCode().equals(result.getCode())){
                 throw new BusinessException(result.getMsg());
             }
-            ObjectMapper mapper = new ObjectMapper();
-            List<Prod> prods = mapper.convertValue(
-                    result.getData(),
-                    new TypeReference<List<Prod>>() {}
-            );
+
+            List<Prod> prods = Convert.toList(Prod.class, result.getData());
 
             if(CollectionUtils.isNotEmpty(prods)){
                 Prod prod = prods.get(0);
