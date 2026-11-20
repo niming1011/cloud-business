@@ -1,5 +1,6 @@
 package com.powernode.controller;
 
+import cn.hutool.core.collection.RandomAccessAvgPartition;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -13,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RequestMapping("admin/user")
 @Tag(name="后台管理系统会员接口管理")
@@ -41,5 +45,28 @@ public class SysMemberController {
     public Result querySysMemberInfo(@PathVariable Long id) {
         Member byId = memberService.getById(id);
         return Result.success(byId);
+    }
+
+    @PutMapping
+    @PreAuthorize("hasAuthority('admin:user:update')")
+    @Operation(description = "修改会员信息")
+    public Result modifySysMemberInfo(@RequestBody Member member) {
+        boolean update = memberService.updateById(member);
+        return Result.handle(update);
+    }
+
+    @DeleteMapping
+    @PreAuthorize("hasAuthority('admin:user:delete')")
+    @Operation(description = "批量删除会员")
+    public Result removeSysMember(@RequestBody List<Integer> ids) {
+        List<Member> members=new ArrayList<>();
+        ids.forEach(id->{
+            Member member = new Member();
+            member.setId(id);
+            member.setStatus(-1);
+            members.add(member);
+        });
+        boolean update = memberService.updateBatchById(members);
+        return Result.handle(update);
     }
 }
