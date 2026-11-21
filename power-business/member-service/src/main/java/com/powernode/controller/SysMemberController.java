@@ -69,4 +69,11 @@ public class SysMemberController {
         boolean update = memberService.updateBatchById(members);
         return Result.handle(update);
     }
+    @GetMapping("getNickNameByOpenId")
+    Result getNickNameByOpenId(@RequestParam String openId){
+        Member member = memberService.getOne(new LambdaQueryWrapper<Member>()
+                .select(Member::getNickName)
+                .eq(Member::getOpenId, openId));
+        return Result.success(member.getNickName());
+    }
 }

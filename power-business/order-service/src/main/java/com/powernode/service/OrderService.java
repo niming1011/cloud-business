@@ -1,7 +1,10 @@
 package com.powernode.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.powernode.domain.Order;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
+
+import java.util.Date;
 
 /**
 * @author Administrator
@@ -10,4 +13,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface OrderService extends IService<Order> {
 
+    Page<Order> queryOrderPage(Page<Order> page, String orderNumber, Integer status, Date startTime, Date endTime);
+
+    Order queryOrderInfo(String orderNumber);
 }
