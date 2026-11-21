@@ -1,5 +1,6 @@
 package com.powernode.controller;
 
+import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -16,6 +17,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @RequestMapping("order/order")
 @Tag(name="订单业务接口管理")
@@ -44,5 +46,20 @@ public class SysOrderController {
     public Result loadOrderInfo(@PathVariable String orderNumber) {
         Order order=orderService.queryOrderInfo(orderNumber);
         return Result.success(order);
+    }
+
+    @GetMapping("soldExcel")
+    @PreAuthorize("hasAuthority('order:order:soldExcel')")
+    @Operation(description = "导出销售记录")
+    public Result exportSoldOrderRecordExcel() {
+        List<Order> list = orderService.list(new LambdaQueryWrapper<Order>()
+                .orderByDesc(Order::getCreateTime));
+
+        String fileName = "simpleWrite" + System.currentTimeMillis() + ".xlsx";
+        // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
+        // 如果这里想使用03 则 传入excelType参数即可
+        EasyExcel.write(fileName, Order.class).sheet("模板").doWrite(list);
+
+        return Result.success(null);
     }
 }

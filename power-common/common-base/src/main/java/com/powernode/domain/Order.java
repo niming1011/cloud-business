@@ -1,5 +1,7 @@
 package com.powernode.domain;
 
+import com.alibaba.excel.annotation.ExcelIgnore;
+import com.alibaba.excel.annotation.ExcelProperty;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -22,128 +24,177 @@ public class Order implements Serializable {
      * 订单ID
      */
     @TableId(type = IdType.AUTO)
+    @ExcelProperty("订单id")
     private Long orderId;
 
     /**
      * 订购用户ID
      */
+    @ExcelProperty("订购用户id")
     private String openId;
 
     /**
      * 订购流水号
      */
+    @ExcelProperty("订购流水号")
+
     private String orderNumber;
 
     /**
      * 总值
      */
+    @ExcelProperty("总值")
+
     private BigDecimal totalMoney;
 
     /**
      * 实际总值
      */
+    @ExcelProperty("实际总值")
+
     private BigDecimal actualTotal;
 
     /**
      * 订单备注
      */
+    @ExcelProperty("订单备注")
+
     private String remarks;
 
     /**
      * 订单状态 1:待付款 2:待发货 3:待收货 4:待评价 5:成功 6:失败
      */
+    @ExcelProperty("订单状态")
+
     private Integer status;
 
     /**
      * 配送类型
      */
+    @ExcelProperty("配送类型")
+
     private String dvyType;
 
     /**
      * 配送方式ID
      */
+    @ExcelProperty("配送方式id")
+
     private Long dvyId;
 
     /**
      * 物流单号
      */
+    @ExcelProperty("物流单号")
+
     private String dvyFlowId;
 
     /**
      * 订单运费
      */
+    @ExcelProperty("订单运费")
+
     private BigDecimal freightAmount;
 
     /**
      * 用户订单地址Id
      */
+    @ExcelIgnore
+
     private Long addrOrderId;
 
     /**
      * 订单商品总数
      */
+    @ExcelProperty("订单商品总数")
+
     private Integer productNums;
 
     /**
      * 订购时间
      */
+    @ExcelProperty("订购时间")
+
     private Date createTime;
 
     /**
      * 订单更新时间
      */
+    @ExcelProperty("订单更新时间")
+
     private Date updateTime;
 
     /**
      * 付款时间
      */
+    @ExcelProperty("付款时间")
+
     private Date payTime;
 
     /**
      * 发货时间
      */
+    @ExcelProperty("发货时间")
+
     private Date dvyTime;
 
     /**
      * 完成时间
      */
+    @ExcelProperty("完成时间")
+
     private Date finallyTime;
 
     /**
      * 取消时间
      */
+    @ExcelProperty("取消时间")
+
     private Date cancelTime;
 
     /**
      * 是否已经支付，1：已经支付过，0：，没有支付过
      */
+    @ExcelIgnore
+
     private Integer isPayed;
 
     /**
      * 用户订单删除状态，0：没有删除， 1：回收站， 2：永久删除
      */
+    @ExcelIgnore
+
     private Integer deleteStatus;
 
     /**
      * 0:默认,1:在处理,2:处理完成
      */
+    @ExcelIgnore
     private Integer refundSts;
 
     /**
      * 优惠总额
      */
+    @ExcelProperty("优惠总额")
+
     private BigDecimal reduceAmount;
 
     /**
      * 订单关闭原因 1-超时未支付 2-退款关闭 4-买家取消 15-已通过货到付款交易
      */
+    @ExcelProperty("订单关闭原因")
+
     private Integer closeType;
     @TableField(exist = false)
+    @ExcelIgnore
     private List<OrderItem> orderItems;
     @TableField(exist = false)
+    @ExcelIgnore
     private MemberAddr userAddrOrder;
     @TableField(exist = false)
+    @ExcelIgnore
     private String nickName;
+    @ExcelIgnore
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
